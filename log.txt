@@ -1,0 +1,52 @@
+Sep 26, 2020 3:00:45 PM org.apache.catalina.startup.ClassLoaderFactory validateFile
+WARNING: Problem with directory [C:\Users\Seven\.SmartTomcat\ServletTest\ServletTest\lib], exists: [false], isDirectory: [false], canRead: [false]
+Sep 26, 2020 3:00:45 PM org.apache.catalina.startup.ClassLoaderFactory validateFile
+WARNING: Problem with directory [C:\Users\Seven\.SmartTomcat\ServletTest\ServletTest\lib], exists: [false], isDirectory: [false], canRead: [false]
+Sep 26, 2020 3:00:45 PM org.apache.catalina.startup.ClassLoaderFactory validateFile
+WARNING: Problem with directory [C:\Users\Seven\.SmartTomcat\ServletTest\ServletTest\lib], exists: [false], isDirectory: [false], canRead: [false]
+Sep 26, 2020 3:00:45 PM org.apache.catalina.startup.ClassLoaderFactory validateFile
+WARNING: Problem with directory [C:\Users\Seven\.SmartTomcat\ServletTest\ServletTest\lib], exists: [false], isDirectory: [false], canRead: [false]
+Sep 26, 2020 3:00:46 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version name:   Apache Tomcat/9.0.37
+Sep 26, 2020 3:00:46 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server built:          Jun 30 2020 20:09:49 UTC
+Sep 26, 2020 3:00:46 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version number: 9.0.37.0
+Sep 26, 2020 3:00:46 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Name:               Windows 10
+Sep 26, 2020 3:00:46 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Version:            10.0
+Sep 26, 2020 3:00:46 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Architecture:          amd64
+Sep 26, 2020 3:00:46 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Java Home:             C:\Program Files\Java\jdk-14
+Sep 26, 2020 3:00:46 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Version:           14+36-1461
+Sep 26, 2020 3:00:46 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Vendor:            Oracle Corporation
+Sep 26, 2020 3:00:46 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_BASE:         C:\Users\Seven\.SmartTomcat\ServletTest\ServletTest
+Sep 26, 2020 3:00:46 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_HOME:         C:\Users\Seven\.SmartTomcat\ServletTest\ServletTest
+Sep 26, 2020 3:00:46 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Duser.language=en
+Sep 26, 2020 3:00:46 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Duser.region=US
+Sep 26, 2020 3:00:46 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dfile.encoding=UTF-8
+Sep 26, 2020 3:00:46 PM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [C:\Program Files\Java\jdk-14\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;E:\Python\Scripts\;E:\Python\;C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\Program Files\dotnet\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\cygwin64\bin;C:\Program Files\Java\jdk-14\bin;C:\Program Files\Java\jdk-14\jre\bin;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;E:\CTEX\UserData\miktex\bin;E:\CTEX\MiKTeX\miktex\bin;E:\CTEX\CTeX\ctex\bin;E:\CTEX\CTeX\cct\bin;E:\CTEX\CTeX\ty\bin;E:\CTEX\Ghostscript\gs9.05\bin;E:\CTEX\GSview\gsview;E:\CTEX\WinEdt;E:\MySQL\mysql-8.0.15-winx64\bin;C:\Users\Seven\AppData\Local\Microsoft\WindowsApps;C:;Users\Seven\.dotnet\tools;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Common Files\Autodesk Shared\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;F:\MATLAB\bin;E:\Maven\apache-maven-3.6.3\bin;E:\MongoDB\Server\4.2\bin;E:\nodejs\;C:\ProgramData\chocolatey\bin;E:\ffmpeg\bin;E:\Git\cmd;E:\PuTTY\;C:\Users\Seven\AppData\Local\Microsoft\WindowsApps;E:\MySQL\mysql-8.0.15-winx64\bin;E:\Microsoft VS Code\bin;E:\PyCharm Community Edition 2019.2.2\bin;E:\nodejs\node_global;;E:\PyCharm Community Edition\bin;;C:\Users\Seven\AppData\Local\Microsoft\WindowsApps;.]
+Sep 26, 2020 3:00:46 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-nio-8080"]
+Sep 26, 2020 3:00:46 PM org.apache.catalina.startup.Catalina load
+INFO: Server initialization in [677] milliseconds
+Sep 26, 2020 3:00:46 PM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Catalina]
+Sep 26, 2020 3:00:46 PM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet engine: [Apache Tomcat/9.0.37]
+Sep 26, 2020 3:00:47 PM org.apache.jasper.servlet.TldScanner scanJars
+INFO: At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+Sep 26, 2020 3:00:47 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-nio-8080"]
+Sep 26, 2020 3:00:47 PM org.apache.catalina.startup.Catalina start
+INFO: Server startup in [1135] milliseconds
