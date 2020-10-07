@@ -1,39 +1,103 @@
 # WebAPI
 
 #### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
-
-#### 软件架构
-软件架构说明
-
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
+该 API 将会提供以下服务：
+1.  用户、订单、商家等信息查询接口
+2.  卖家、买家用户注册接口
+3.  商品搜索
+4.  订单操作，包括：下单、取消订单、退货等
+5.  交易操作
+---
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  身份验证：  
+    + 请求 URL:
+    
+        ```GET: /webapi/user/login```
+    
+    + 参数信息:
+    
+        |参数名|类型|必填|缺省值|说明|
+        |:----:|:----:|:----:|:----:|:----:|
+        |type|enum|否|buyer|用户类型(buyer或者seller)|
+        |accountName|String|是|null|账户昵称(4-8个非数字字符)|
+        |password|String|是|null|帐户密码(8-16个由大小写字母和数字组成的字符串)|
+    
+    + 请求示例:
+    
+        ```<ip>/webapi/user/login?type=buyer&accountName=abcde&password=Abc123456```
+    
+    + 响应示例:
+        ```
+        {
+            "status": true,
+            "type": buyer,
+            "ID": 123456,
+            "accountName": "abcde",
+        }
+        ```
+      
+        ```
+        {
+            "status": false,
+            "errMsg": "密码错误"
+        }
+        ```
+        
+    + 字段说明:
+    
+      |字段名称|说明|
+      |:----:|:----:|
+      |status|响应状态|
+      |type|用户类型|
+      |ID|用户ID|
+      |accountName|用户昵称|
+      |errMsg|错误信息|
+    
+2.  用户注册:
+    + 请求 URL:
+        
+        ```POST: /webapi/user/register```
+        
+    + 参数信息:
+    
+        |参数名|类型|必填|缺省值|说明|
+        |:----:|:----:|:----:|:----:|:----:|
+        |type|enum|否|buyer|用户类型(buyer或者seller)|
+        |accountName|String|是|null|账户名称(4-8个非数字字符)|
+        |password|String|是|null|帐户密码(8-16个由大小写字母和数字组成的字符串)|
+        |name|String|是|null|用户真实姓名|
+        |phoneNumber|String|是|null|电话号码|
+        |gender|enum|否|secret|性别|
+        |age|int|是|null|用户年龄|
+    
+    + 请求示例:
+    
+        ```<ip>/webapi/user/login?type=buyer&accountName=abcde&password=Abc123456&name=Tony&phoneNumber=15836274626&gender=male```
+    
+    + 响应示例:
+        ```
+        {
+            "status": true
+        }
+        ```
+      
+        ```
+        {
+            "status": false,
+            "errMsg": "密码格式错误"
+        }
+        ```
+        
+    + 字段说明:
+    
+      |字段名称|说明|
+      |:----:|:----:|
+      |status|响应状态|
+      |errMsg|错误信息|
 
+---
 #### 参与贡献
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
++ 戚瀚中
++ 陈岳涛
