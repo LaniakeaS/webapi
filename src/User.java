@@ -47,7 +47,7 @@ public class User {
      * @exception AccountNameExistException The name is already exist.
      * @exception PasswordFormatException Password should combined by 8-20 English capital and small characters and numbers.
      */
-    public User(int age, String phoneNumber, String name, String account, String password, Gender gender)
+    protected User(int age, String phoneNumber, String name, String account, String password, Gender gender)
             throws AgeException, PhoneNumberFormatException, AccountNameExistException, PasswordFormatException {
 
         if (age < 18)
@@ -89,7 +89,7 @@ public class User {
      * @exception AccountNotRegisteredException Account has not been registered.
      * @exception PasswordIncorrectException Incorrect password.
      */
-    public static User login(String account, String password)
+    protected static User login(String account, String password)
             throws AccountNotRegisteredException, PasswordIncorrectException {
 
         // TODO 根据 ID 或者 account name 来确认其是否存在于数据库中，然后验证密码。如果成功返回 User，否则抛出异常。
@@ -109,7 +109,7 @@ public class User {
      * @exception AccountNotRegisteredException Account has not been registered.
      * @exception PasswordIncorrectException Incorrect password.
      */
-    public static User login(int ID, String password)
+    protected static User login(int ID, String password)
             throws AccountNotRegisteredException, PasswordIncorrectException {
 
         // TODO 根据 ID 或者 account name 来确认数据库是否存在，然后验证密码。如果成功返回 User，否则抛出异常。
@@ -124,7 +124,7 @@ public class User {
      * <br>
      * @param newUser a instance of user
      */
-    public static void register(User newUser) {
+    protected static void register(User newUser) {
 
         // TODO 调用数据库接口的 INSERT 功能在数据库中建立新的用户
         // TODO 查询新建立的用户 ID 并初始化
@@ -133,28 +133,28 @@ public class User {
     }
 
 
-    public Address address(int ID) {
+    protected Address address(int ID) {
 
         return addresses.get(ID);
 
     }
 
 
-    public int ID() {
+    protected int ID() {
 
         return ID;
 
     }
 
 
-    public String account() {
+    protected String account() {
 
         return account;
 
     }
 
 
-    public String inDate() {
+    protected String inDate() {
 
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         return formatter.format(inDate);
@@ -162,21 +162,21 @@ public class User {
     }
 
 
-    public void addAddress(String country, String province, String city, String countyOrDistrict, String detail) {
+    protected void addAddress(String country, String province, String city, String countyOrDistrict, String detail) {
 
         addresses.add(new Address(country, province, city, countyOrDistrict, detail));
 
     }
 
 
-    public void deleteAddress(int ID) {
+    protected void deleteAddress(int ID) {
 
         addresses.remove(ID);
 
     }
 
 
-    public void saveChanges() {
+    protected void saveChanges() {
 
         // TODO
 

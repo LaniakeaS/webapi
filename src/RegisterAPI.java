@@ -12,24 +12,21 @@ import javax.servlet.http.HttpServletResponse;
  * <h3>Description:</h3>
  * This class provide interfaces to accomplish several operations about users.<br>
  * <br>
- * <br>
  * @author Scott Piao
  * @author Hanzhong Qi<br>
  * E-Mail: <a href=mailto:17722018@bjtu.edu.cn>17722018@bjtu.edu.cn</a><br>
  * ID: 17722018<br>
  * LU ID: 34648127<br>
  */
-@WebServlet(urlPatterns = {"/user/register"})
-public class registerAPI extends HttpServlet {
+@WebServlet(urlPatterns = {"/webapi/user/register"})
+public class RegisterAPI extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.<br>
      * <br>
-     * <br>
      * @param request servlet request
      * @param response servlet response<br>
-     * <br>
      * <br>
      * @throws IOException if an I/O error occurs
      */
@@ -63,8 +60,8 @@ public class registerAPI extends HttpServlet {
 
                 case buyer -> {
 
-                    Buyer buyer = new Buyer(age, phoneNumber, name, accountName, password, gender);
-                    Buyer.register(buyer);
+                    User user = new User(age, phoneNumber, name, accountName, password, gender);
+                    User.register(user);
 
                 }
 
@@ -105,10 +102,8 @@ public class registerAPI extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.<br>
      * <br>
-     * <br>
      * @param request servlet request
      * @param response servlet response<br>
-     * <br>
      * <br>
      * @throws IOException if an I/O error occurs
      */
@@ -123,7 +118,6 @@ public class registerAPI extends HttpServlet {
 
     /**
      * Returns a short description of the servlet.<br>
-     * <br>
      * <br>
      * @return a String containing servlet description
      */
