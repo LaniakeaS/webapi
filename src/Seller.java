@@ -9,11 +9,11 @@ import exceptions.*;
  */
 public class Seller extends User {
 
-    protected Seller(int age, String phoneNumber, String name, String accountName, String nickName, String password,
+    protected Seller(int age, String phoneNumber, String name, String identityNum, String accountName, String nickName, String password,
                      Gender gender, String introduceSign)
             throws UserAPIException {
 
-        super(age, phoneNumber, name, accountName, nickName, password, gender, introduceSign);
+        super(age, phoneNumber, name, identityNum, accountName, nickName, password, gender, introduceSign);
 
     }
 

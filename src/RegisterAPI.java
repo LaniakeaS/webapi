@@ -60,11 +60,15 @@ public class RegisterAPI extends HttpServlet {
             if (introduceSign == null)
                 introduceSign = "";
 
+            String identityNum = request.getParameter("identityNum");
+            if (identityNum == null)
+                identityNum = "";
+
             switch (type) {
 
                 case buyer -> {
 
-                    User user = new User(age, phoneNumber, name, accountName, nickName, password, gender,
+                    User user = new User(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
                             introduceSign);
                     User.register(user);
 
@@ -72,7 +76,7 @@ public class RegisterAPI extends HttpServlet {
 
                 case seller -> {
 
-                    Seller seller = new Seller(age, phoneNumber, name, accountName, nickName, password, gender,
+                    Seller seller = new Seller(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
                             introduceSign);
                     Seller.register(seller);
 

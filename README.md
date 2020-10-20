@@ -67,8 +67,9 @@
         |accountName|String|是|null|账户名称(4-8个非特殊字符)|
         |nickName|String|是|null|昵称(4-8个非特殊字符)|
         |password|String|是|null|帐户密码(8-16个由大小写字母和数字组成的字符串)|
-        |introduceSign|String|否|""|个人签名|
+        |introduceSign|String|否|null|个人签名|
         |name|String|是|null|用户真实姓名|
+        |identityNum|String|否|null|证件号码|
         |phoneNumber|String|是|null|电话号码|
         |gender|enum|否|secret|性别|
         |age|int|是|null|用户年龄|

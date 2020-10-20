@@ -19,15 +19,12 @@ import java.util.regex.Pattern;
  */
 public class User {
 
-    public Gender gender;
-    public int age;
-    public String name, password, phoneNumber, nickName, introduceSign;
-
     protected Date inDate;
-    protected int ID;
+    protected Gender gender;
+    protected int ID, age;
     protected List<Address> addresses;
     protected List<Order> orders;
-    protected String account;
+    protected String accountName, name, password, phoneNumber, nickName, introduceSign, identityNum;
 
 
     /**
@@ -48,8 +45,8 @@ public class User {
      * @exception PasswordFormatException Password should combined by 8-20 English capital and small characters and
      *                                    numbers.
      */
-    protected User(int age, String phoneNumber, String name, String accountName, String nickName, String password,
-                   Gender gender, String introduceSign)
+    protected User(int age, String phoneNumber, String name, String identityNum, String accountName, String nickName,
+                   String password, Gender gender, String introduceSign)
             throws UserAPIException {
 
         if (age < 18)
@@ -72,14 +69,19 @@ public class User {
                 .matches())
             throw new PasswordFormatException();
 
+        if (!Pattern.compile("^[1-9]\\d{5}(18|19|20)\\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$").
+                matcher(identityNum).matches())
+            throw new IdentityNumException();
+
         this.age = age;
         this.phoneNumber = phoneNumber;
         this.name = name;
-        this.account = accountName;
+        this.accountName = accountName;
         this.password = password;
         this.nickName = nickName;
         this.introduceSign = introduceSign;
         this.gender = gender;
+        this.identityNum = identityNum;
         inDate = new Date(System.currentTimeMillis());
         addresses = new ArrayList<>();
         orders = new ArrayList<>();
@@ -140,27 +142,6 @@ public class User {
         // TODO 调用数据库接口的 INSERT 功能在数据库中建立新的用户
         // TODO 查询新建立的用户 ID 并初始化
         newUser.ID = 0;
-
-    }
-
-
-    protected Address address(int ID) {
-
-        return addresses.get(ID);
-
-    }
-
-
-    protected int ID() {
-
-        return ID;
-
-    }
-
-
-    protected String account() {
-
-        return account;
 
     }
 
