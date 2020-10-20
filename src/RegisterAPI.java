@@ -45,29 +45,35 @@ public class RegisterAPI extends HttpServlet {
 
             UserType type = UserType.valueOf(typeString);
             String accountName = request.getParameter("accountName");
+            String nickName = request.getParameter("nickName");
             String password = request.getParameter("password");
             String name = request.getParameter("name");
             String phoneNumber = request.getParameter("phoneNumber");
             int age = Integer.parseInt(request.getParameter("age"));
-            String genderString = request.getParameter("gender");
 
+            String genderString = request.getParameter("gender");
             if (genderString == null)
                 genderString = "secret";
-
             Gender gender = Gender.valueOf(genderString);
+
+            String introduceSign = request.getParameter("introduceSign");
+            if (introduceSign == null)
+                introduceSign = "";
 
             switch (type) {
 
                 case buyer -> {
 
-                    User user = new User(age, phoneNumber, name, accountName, password, gender);
+                    User user = new User(age, phoneNumber, name, accountName, nickName, password, gender,
+                            introduceSign);
                     User.register(user);
 
                 }
 
                 case seller -> {
 
-                    Seller seller = new Seller(age, phoneNumber, name, accountName, password, gender);
+                    Seller seller = new Seller(age, phoneNumber, name, accountName, nickName, password, gender,
+                            introduceSign);
                     Seller.register(seller);
 
                 }

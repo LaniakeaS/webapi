@@ -64,8 +64,10 @@
         |参数名|类型|必填|缺省值|说明|
         |:----:|:----:|:----:|:----:|:----:|
         |type|enum|否|buyer|用户类型(buyer或者seller)|
-        |accountName|String|是|null|账户名称(4-8个非数字字符)|
+        |accountName|String|是|null|账户名称(4-8个非特殊字符)|
+        |nickName|String|是|null|昵称(4-8个非特殊字符)|
         |password|String|是|null|帐户密码(8-16个由大小写字母和数字组成的字符串)|
+        |introduceSign|String|否|""|个人签名|
         |name|String|是|null|用户真实姓名|
         |phoneNumber|String|是|null|电话号码|
         |gender|enum|否|secret|性别|
@@ -73,7 +75,7 @@
     
     + 请求示例:
     
-        ```<ip>/webapi/user/login?type=buyer&accountName=abcde&password=Abc123456&name=Tony&phoneNumber=15836274626&gender=male```
+        ```<ip>/webapi/user/login?nickName=SB567&type=buyer&accountName=abcde&password=Abc123456&name=Tony&phoneNumber=15836274626&gender=male```
     
     + 响应示例:
         ```

@@ -1,8 +1,4 @@
-import exceptions.AccountNameExistException;
-import exceptions.AgeException;
-import exceptions.PasswordFormatException;
-import exceptions.PhoneNumberFormatException;
-
+import exceptions.*;
 
 
 /**
@@ -13,10 +9,11 @@ import exceptions.PhoneNumberFormatException;
  */
 public class Seller extends User {
 
-    protected Seller(int age, String phoneNumber, String name, String account, String password, Gender gender)
-            throws AgeException, PhoneNumberFormatException, AccountNameExistException, PasswordFormatException {
+    protected Seller(int age, String phoneNumber, String name, String accountName, String nickName, String password,
+                     Gender gender, String introduceSign)
+            throws UserAPIException {
 
-        super(age, phoneNumber, name, account, password, gender);
+        super(age, phoneNumber, name, accountName, nickName, password, gender, introduceSign);
 
     }
 

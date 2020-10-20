@@ -1,12 +1,11 @@
 import net.sf.json.JSONObject;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * <h3>Description:</h3>
@@ -18,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  * ID: 17722018<br>
  * LU ID: 34648127<br>
  */
-@WebServlet(urlPatterns = {"/webapi/geo/ip"})
-public class LocationAPI extends HttpServlet {
+@WebServlet(urlPatterns = {"/webapi/user/home"})
+public class HomeAPI extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,6 +33,8 @@ public class LocationAPI extends HttpServlet {
             throws IOException {
 
         response.setContentType("text/json;charset=UTF-8");
+        String ip = request.getRemoteAddr();
+        String accountName = request.getParameter("accountName");
         PrintWriter out = response.getWriter();
 
         try {
@@ -41,12 +42,49 @@ public class LocationAPI extends HttpServlet {
             Client client = new Client();
 
             //Local Host Address of service
-            String ip = request.getParameter("ip");
             String responseContent = client.getLocation(ip);
             out.println("{");
-            out.println("    \"ip\": " + ip + ",");
             out.println("    \"location\":");
-            out.println(parseJSON(responseContent));
+            out.println(LocationAPI.parseJSON(responseContent) + ",");
+
+            // TODO 根据用户名从数据库读取
+            out.println("    \"avatar\": ICON,");
+
+            out.println("    \"toBuy\":");
+            out.println("    [");
+
+            // TODO 读取购物车中的商品，判断商品库存
+            out.println("    ");
+
+            out.println("    ],");
+            out.println("    \"toSell\":");
+            out.println("    [");
+
+            // TODO 读取想卖清单中的商品
+            out.println("    ");
+
+            out.println("    ],");
+            out.println("    \"discount\":");
+            out.println("    [");
+
+            // TODO 想买的物品打折数量
+            out.println("    ");
+
+            out.println("    ],");
+            out.println("    \"popular\":");
+            out.println("    [");
+
+            // TODO 销量最高top10
+            out.println("    ");
+
+            out.println("    ],");
+            out.println("    \"guess\":");
+            out.println("    [");
+
+            // TODO 推荐商品
+            out.println("    ");
+
+            out.println("    ],");
             out.println("}");
 
         } catch (Exception e) {
@@ -71,24 +109,6 @@ public class LocationAPI extends HttpServlet {
             throws IOException {
 
         processRequest(request, response);
-
-    }
-
-
-    /**
-     * This method is for extracting a string in a format of json to get location detail of ip.<br>
-     * <br>
-     * @param json a json string<br>
-     * <br>
-     * @return a string
-     */
-    protected static String parseJSON(String json) {
-
-        JSONObject jsonObject = JSONObject.fromObject(json);
-        JSONObject content = jsonObject.getJSONObject("content");
-        JSONObject detail = content.getJSONObject("address_detail");
-        return ("    {\n" + "        \"city\": " + detail.getString("city") + ",\n        \"province\": " +
-                detail.getString("province") + "\n    }");
 
     }
 

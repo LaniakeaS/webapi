@@ -21,7 +21,7 @@ public class User {
 
     public Gender gender;
     public int age;
-    public String name, password, phoneNumber;
+    public String name, password, phoneNumber, nickName, introduceSign;
 
     protected Date inDate;
     protected int ID;
@@ -37,7 +37,7 @@ public class User {
      * @param age user age
      * @param phoneNumber phone number of the user
      * @param name user's real name
-     * @param account user's account name (will be used while login, should be exclusive)
+     * @param accountName user's account name (will be used while login, should be exclusive)
      * @param password password for verifying.
      * @param gender male, female or secret.<br>
      * <br>
@@ -45,10 +45,12 @@ public class User {
      * @exception AgeException The age should greater than 18.
      * @exception PhoneNumberFormatException Should not contain non-numeric character.
      * @exception AccountNameExistException The name is already exist.
-     * @exception PasswordFormatException Password should combined by 8-20 English capital and small characters and numbers.
+     * @exception PasswordFormatException Password should combined by 8-20 English capital and small characters and
+     *                                    numbers.
      */
-    protected User(int age, String phoneNumber, String name, String account, String password, Gender gender)
-            throws AgeException, PhoneNumberFormatException, AccountNameExistException, PasswordFormatException {
+    protected User(int age, String phoneNumber, String name, String accountName, String nickName, String password,
+                   Gender gender, String introduceSign)
+            throws UserAPIException {
 
         if (age < 18)
             throw new AgeException();
@@ -56,18 +58,27 @@ public class User {
         if (Pattern.compile("\\d{11}").matcher(phoneNumber).matches())
             throw new PhoneNumberFormatException();
 
+        if (!Pattern.compile("\\w{4,18}").matcher(accountName).matches())
+            throw new AccountNameFormatException();
+
+        if (!Pattern.compile("\\w{4,18}").matcher(nickName).matches())
+            throw new NickNameFormatException();
+
         // TODO 判断账户名称是否已经存在
         if (false)
             throw new AccountNameExistException();
 
-        if (!Pattern.compile("^(?!\\d+$)(?![A-Za-z]+$)(?![a-z0-9]+$)(?![A-Z0-9]+$)[a-zA-Z0-9]{8,16}$").matcher(password).matches())
+        if (!Pattern.compile("^(?!\\d+$)(?![A-Za-z]+$)(?![a-z0-9]+$)(?![A-Z0-9]+$)[a-zA-Z0-9]{8,16}$").matcher(password)
+                .matches())
             throw new PasswordFormatException();
 
         this.age = age;
         this.phoneNumber = phoneNumber;
         this.name = name;
-        this.account = account;
+        this.account = accountName;
         this.password = password;
+        this.nickName = nickName;
+        this.introduceSign = introduceSign;
         this.gender = gender;
         inDate = new Date(System.currentTimeMillis());
         addresses = new ArrayList<>();
