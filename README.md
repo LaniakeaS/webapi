@@ -53,6 +53,11 @@
       |ID|用户ID|
       |accountName|用户昵称|
       |errMsg|错误信息|
+      
+    + 登录Cookie及安全
+        1.Cookie有效期为0
+        2.HttpOnly属性为True
+        3.对Cookie综合时间、用户名和随机数进行加密
     
 2.  用户注册:
     + 请求 URL:
