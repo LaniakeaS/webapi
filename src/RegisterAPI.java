@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = {"/user/register"})
 public class RegisterAPI extends HttpServlet {
 
+    protected static IDGenerator idGenerator = new IDGenerator(5L, 3L);
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.<br>
@@ -69,14 +71,14 @@ public class RegisterAPI extends HttpServlet {
             case buyer:
 
                 User user = new User(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
-                        introduceSign);
+                        introduceSign, String.valueOf(idGenerator.nextId()));
                 User.register(user);
                 break;
 
             case seller:
 
                 Seller seller = new Seller(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
-                        introduceSign);
+                        introduceSign, String.valueOf(idGenerator.nextId()));
                 Seller.register(seller);
                 break;
 

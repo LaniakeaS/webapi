@@ -21,10 +21,10 @@ public class User {
 
     protected Date inDate;
     protected Gender gender;
-    protected int ID, age;
+    protected int age;
     protected List<Address> addresses;
     protected List<Order> orders;
-    protected String accountName, name, password, phoneNumber, nickName, introduceSign, identityNum;
+    protected String accountName, name, password, phoneNumber, nickName, introduceSign, identityNum, ID;
 
 
     /**
@@ -46,7 +46,7 @@ public class User {
      *                                    numbers.
      */
     protected User(int age, String phoneNumber, String name, String identityNum, String accountName, String nickName,
-                   String password, Gender gender, String introduceSign)
+                   String password, Gender gender, String introduceSign, String ID)
             throws UserAPIException {
 
         if (age < 18)
@@ -82,11 +82,12 @@ public class User {
         this.introduceSign = introduceSign;
         this.gender = gender;
         this.identityNum = identityNum;
+        this.ID = ID;
         inDate = new Date(System.currentTimeMillis());
         addresses = new ArrayList<>();
         orders = new ArrayList<>();
 
-        // TODO 在数据库中建立条目，初始化 ID
+        // TODO 在数据库中建立条目
 
     }
 
@@ -141,7 +142,6 @@ public class User {
 
         // TODO 调用数据库接口的 INSERT 功能在数据库中建立新的用户
         // TODO 查询新建立的用户 ID 并初始化
-        newUser.ID = 0;
 
     }
 
