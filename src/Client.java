@@ -33,7 +33,7 @@ public class Client {
             paramsMap.put("ak", ak);
             String paramsStr = snCal.toQueryString(paramsMap);
             String wholeStr = "/location/ip?" + paramsStr + sk;
-            String tempStr = URLEncoder.encode(wholeStr, StandardCharsets.UTF_8);
+            String tempStr = URLEncoder.encode(wholeStr, "UTF-8");
             String sn = snCal.MD5(tempStr);
             /* get sn */
 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="10.128.11.95" id="e4a28653-3578-4731-8e7b-8d1a7c9b1920" port="6661" nameFormat="DESCRIPTIVE" username="distribsys" />
+    </configs>
+  </component>
+</project>

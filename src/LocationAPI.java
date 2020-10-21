@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * ID: 17722018<br>
  * LU ID: 34648127<br>
  */
-@WebServlet(urlPatterns = {"/webapi/geo/ip"})
+@WebServlet(urlPatterns = {"/geo/ip"})
 public class LocationAPI extends HttpServlet {
 
     /**
@@ -42,16 +42,25 @@ public class LocationAPI extends HttpServlet {
 
             //Local Host Address of service
             String ip = request.getParameter("ip");
+            if (ip == null)
+                ip = request.getRemoteAddr();
+
             String responseContent = client.getLocation(ip);
+            responseContent = parseJSON(responseContent);
             out.println("{");
+            out.println("    \"status\": " + 0 + ",");
             out.println("    \"ip\": " + ip + ",");
             out.println("    \"location\":");
-            out.println(parseJSON(responseContent));
+            out.println(responseContent);
             out.println("}");
 
         } catch (Exception e) {
 
             e.printStackTrace();
+            out.println("{");
+            out.println("    \"status\": " + -1 + ",");
+            out.println("    \"errMsg\": \"" + e.getMessage() + "\"");
+            out.println("}");
 
         }
 

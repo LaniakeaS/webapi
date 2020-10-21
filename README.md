@@ -30,7 +30,7 @@
     + 响应示例:
         ```
         {
-            "status": true,
+            "status": 0,
             "type": buyer,
             "ID": 123456,
             "accountName": "abcde",
@@ -39,7 +39,7 @@
       
         ```
         {
-            "status": false,
+            "status": -1,
             "errMsg": "密码错误"
         }
         ```
@@ -48,7 +48,7 @@
     
       |字段名称|说明|
       |:----:|:----:|
-      |status|响应状态|
+      |status|状态码: 0(正常), -1(异常)|
       |type|用户类型|
       |ID|用户ID|
       |accountName|用户昵称|
@@ -81,13 +81,13 @@
     + 响应示例:
         ```
         {
-            "status": true
+            "status": 0
         }
         ```
       
         ```
         {
-            "status": false,
+            "status": -1,
             "errMsg": "密码格式错误"
         }
         ```
@@ -96,7 +96,7 @@
     
       |字段名称|说明|
       |:----:|:----:|
-      |status|响应状态|
+      |status|状态码: 0(正常), -1(异常)|
       |errMsg|错误信息|
 
 3.  IP定位:
@@ -117,6 +117,7 @@
     + 响应示例:
         ```
         {
+            "status": 0,
             "ip": 112.54.81.12,
             "location":
             {
@@ -125,15 +126,24 @@
             }
         }
         ```
+      
+        ```
+        {
+            "status": -1,
+            "errMsg": "error message"
+        }
+        ```
         
     + 字段说明:
     
       |字段名称|说明|
       |:----:|:----:|
+      |status|状态码: 0(正常), -1(异常)|
       |ip|请求时用到的ip地址|
       |location|位置信息|
       |city|城市|
       |province|省份|
+      |errMsg|错误信息|
 
 ---
 #### 参与贡献

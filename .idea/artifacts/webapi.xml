@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="webapi">
+    <output-path>$PROJECT_DIR$/out/artifacts/webapi</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="web-api" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/lib/commons-beanutils-1.9.3.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/commons-collections-3.2.1.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/commons-lang-2.6.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/commons-logging-1.2.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/ezmorph-1.0.6.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/json-lib-2.4-jdk15.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/mysql-connector-java-8.0.21.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/servlet-api.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

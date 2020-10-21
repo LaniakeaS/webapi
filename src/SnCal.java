@@ -1,3 +1,4 @@
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
@@ -13,7 +14,7 @@ import java.util.Map.Entry;
  */
 public class SnCal {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
 
         SnCal snCal = new SnCal();
         Map<String, String> paramsMap = new LinkedHashMap<>();
@@ -21,13 +22,14 @@ public class SnCal {
         paramsMap.put("ak", "dfDq2fzs2yesYRtNK0LQwKjgIHWlIHxw");
         String paramsStr = snCal.toQueryString(paramsMap);
         String wholeStr = "/location/ip?" + paramsStr + "qEAFQdGzU6lDQwZe3dwkipXShqjFQK6u";
-        String tempStr = URLEncoder.encode(wholeStr, StandardCharsets.UTF_8);
+        String tempStr = URLEncoder.encode(wholeStr, "UTF-8");
         System.out.println(snCal.MD5(tempStr));
 
     }
 
 
-    protected String toQueryString(Map<?, ?> data) {
+    protected String toQueryString(Map<?, ?> data)
+            throws UnsupportedEncodingException {
 
         StringBuilder queryString = new StringBuilder();
 
@@ -35,7 +37,7 @@ public class SnCal {
 
             queryString.append(pair.getKey()).append("=");
             queryString.append(URLEncoder.encode((String) pair.getValue(),
-                    StandardCharsets.UTF_8)).append("&");
+                    "UTF-8")).append("&");
 
         }
         if (queryString.length() > 0)

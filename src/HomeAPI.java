@@ -17,7 +17,7 @@ import java.io.PrintWriter;
  * ID: 17722018<br>
  * LU ID: 34648127<br>
  */
-@WebServlet(urlPatterns = {"/webapi/user/home"})
+@WebServlet(urlPatterns = {"/user/home"})
 public class HomeAPI extends HttpServlet {
 
     /**

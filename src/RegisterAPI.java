@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * ID: 17722018<br>
  * LU ID: 34648127<br>
  */
-@WebServlet(urlPatterns = {"/webapi/user/register"})
+@WebServlet(urlPatterns = {"/user/register"})
 public class RegisterAPI extends HttpServlet {
 
     /**
@@ -66,28 +66,24 @@ public class RegisterAPI extends HttpServlet {
 
             switch (type) {
 
-                case buyer -> {
+            case buyer:
 
-                    User user = new User(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
-                            introduceSign);
-                    User.register(user);
+                User user = new User(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
+                        introduceSign);
+                User.register(user);
+                break;
 
-                }
+            case seller:
 
-                case seller -> {
+                Seller seller = new Seller(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
+                        introduceSign);
+                Seller.register(seller);
+                break;
 
-                    Seller seller = new Seller(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
-                            introduceSign);
-                    Seller.register(seller);
+            default:
 
-                }
-
-                default -> {
-
-                    System.out.println("Fatal Error! (UserType)");
-                    throw new UserTypeException();
-
-                }
+                System.out.println("Fatal Error! (UserType)");
+                throw new UserTypeException();
             }
 
             out.println("{");
