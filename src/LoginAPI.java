@@ -1,25 +1,23 @@
-import net.sf.json.JSONObject;
-
-import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * <h3>Description:</h3>
- * This class provide interfaces to accomplish several operations about users.<br>
- * <br>
  * @author Scott Piao
  * @author Hanzhong Qi<br>
  * E-Mail: <a href=mailto:17722018@bjtu.edu.cn>17722018@bjtu.edu.cn</a><br>
  * ID: 17722018<br>
  * LU ID: 34648127<br>
  */
-@WebServlet(urlPatterns = {"/geo/ip"})
-public class LocationAPI extends HttpServlet {
+@WebServlet(urlPatterns = {"/user/login"})
+public class LoginAPI extends HttpServlet {
+
+    protected static Map<String, User> users = new HashMap<>();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,20 +36,25 @@ public class LocationAPI extends HttpServlet {
 
         try {
 
-            Client client = new Client();
+            String accountName = request.getParameter("accountName");
+            String password = request.getParameter("password");
+            User newUser = users.get(accountName);
+            String isLoggedIn = "true";
 
-            //Local Host Address of service
-            String ip = request.getParameter("ip");
-            if (ip == null)
-                ip = request.getRemoteAddr();
+            if (newUser == null) {
 
-            String responseContent = client.getLocation(ip);
-            responseContent = parseJSON(responseContent);
+                newUser = User.login(accountName, password);
+                isLoggedIn = "false";
+
+            }
+
             out.println("{");
             out.println("    \"status\": 0,");
-            out.println("    \"ip\": " + ip + ",");
-            out.println("    \"location\":");
-            out.println(responseContent);
+            out.println("    \"ID\": " + newUser.ID + ",");
+            out.println("    \"accountName\": " + newUser.accountName + ",");
+            out.println("    \"nickName\": " + newUser.nickName + ",");
+            out.println("    \"lease\": null,");
+            out.println("    \"isLoggedIn\": " + isLoggedIn);
             out.println("}");
 
         } catch (Exception e) {
@@ -59,7 +62,7 @@ public class LocationAPI extends HttpServlet {
             e.printStackTrace();
             out.println("{");
             out.println("    \"status\": -1,");
-            out.println("    \"errMsg\": \"" + e.getMessage() + "\"");
+            out.println("    \"errMsg\": " + e.getMessage());
             out.println("}");
 
         }
@@ -80,24 +83,6 @@ public class LocationAPI extends HttpServlet {
             throws IOException {
 
         processRequest(request, response);
-
-    }
-
-
-    /**
-     * This method is for extracting a string in a format of json to get location detail of ip.<br>
-     * <br>
-     * @param json a json string<br>
-     * <br>
-     * @return a string
-     */
-    protected static String parseJSON(String json) {
-
-        JSONObject jsonObject = JSONObject.fromObject(json);
-        JSONObject content = jsonObject.getJSONObject("content");
-        JSONObject detail = content.getJSONObject("address_detail");
-        return ("    {\n" + "        \"city\": " + detail.getString("city") + ",\n        \"province\": " +
-                detail.getString("province") + "\n    }");
 
     }
 

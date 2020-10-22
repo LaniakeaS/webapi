@@ -31,16 +31,18 @@
         ```
         {
             "status": 0,
-            "type": buyer,
             "ID": 123456,
-            "accountName": "abcde",
+            "accountName": abcde,
+            "nickName": Pony,
+            "lease": null,
+            "isLoggedIn": false
         }
         ```
       
         ```
         {
             "status": -1,
-            "errMsg": "密码错误"
+            "errMsg": 密码错误
         }
         ```
         
@@ -94,7 +96,7 @@
         ```
         {
             "status": -1,
-            "errMsg": "密码格式错误"
+            "errMsg": 密码格式错误
         }
         ```
         
@@ -136,7 +138,7 @@
         ```
         {
             "status": -1,
-            "errMsg": "error message"
+            "errMsg": error message
         }
         ```
         

@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * <h3>Description:</h3>
- * This class provide interfaces to accomplish several operations about users.<br>
- * <br>
  * @author Scott Piao
  * @author Hanzhong Qi<br>
  * E-Mail: <a href=mailto:17722018@bjtu.edu.cn>17722018@bjtu.edu.cn</a><br>
@@ -89,14 +86,14 @@ public class RegisterAPI extends HttpServlet {
             }
 
             out.println("{");
-            out.println("\"status\": " + "true");
+            out.println("    \"status\": 0");
 
         } catch (Exception e) {
 
             e.printStackTrace();
             out.println("{");
-            out.println("\"status\": " + "false,");
-            out.println("\"errMsg\": " + e.getMessage());
+            out.println("    \"status\": -1,");
+            out.println("    \"errMsg\": " + e.getMessage());
 
         } finally {
 
@@ -108,7 +105,7 @@ public class RegisterAPI extends HttpServlet {
 
 
     /**
-     * Handles the HTTP <code>GET</code> method.<br>
+     * Handles the HTTP <code>POST</code> method.<br>
      * <br>
      * @param request servlet request
      * @param response servlet response<br>

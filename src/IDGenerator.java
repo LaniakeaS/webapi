@@ -1,15 +1,13 @@
+/**
+ * <h3>Description:</h3>
+ * Use snowflake algorithm from Twitter to generate ID.<br>
+ * <br>
+ * @author Twitter<br>
+ */
 public class IDGenerator {
 
-    private final long epoch = 1491004800000L;
     private final long workerIdBits = 5L;
     private final long dataCenterIdBits = 5L;
-    private final long maxWorkerId = ~(-1L << workerIdBits);
-    private final long maxDataCenterId = ~(-1 << dataCenterIdBits);
-    private final long sequenceBits = 12L;
-    private final long workerIdShift = sequenceBits;
-    private final long dataCenterIdShift = sequenceBits + workerIdBits;
-    private final long timestampShift = sequenceBits + workerIdBits + dataCenterIdBits;
-    private final long sequenceMask = ~(-1L << sequenceBits);
     private long dataCenterId;
     private long workerId;
     private long sequence;
@@ -17,10 +15,12 @@ public class IDGenerator {
 
     public IDGenerator(long dataCenterId, long workerId) {
 
+        long maxDataCenterId = ~(-1 << dataCenterIdBits);
         if (dataCenterId > maxDataCenterId || dataCenterId < 0)
             throw new IllegalArgumentException(String.format("dataCenterId can't be greater than %d or less than 0",
                     maxDataCenterId));
 
+        long maxWorkerId = ~(-1L << workerIdBits);
         if (workerId > maxWorkerId || workerId < 0)
             throw new IllegalArgumentException(String.format("worker Id can't be greater than %d or less than 0",
                     maxWorkerId));
@@ -40,8 +40,10 @@ public class IDGenerator {
                     String.format("Clock moved backwards. Refusing to generate id for %d milliseconds",
                             lastTimestamp - timestamp));
 
+        long sequenceBits = 12L;
         if (timestamp == lastTimestamp) {
 
+            long sequenceMask = ~(-1L << sequenceBits);
             sequence = (sequence + 1) & sequenceMask;
 
             if (sequence == 0)
@@ -51,9 +53,12 @@ public class IDGenerator {
             sequence = 0L;
 
         lastTimestamp = timestamp;
+        long epoch = 1491004800000L;
+        long dataCenterIdShift = sequenceBits + workerIdBits;
+        long timestampShift = sequenceBits + workerIdBits + dataCenterIdBits;
         return ((timestamp - epoch) << timestampShift) |
                 (dataCenterId << dataCenterIdShift) |
-                (workerId << workerIdShift) |
+                (workerId << sequenceBits) |
                 sequence;
 
     }

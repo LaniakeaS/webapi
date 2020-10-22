@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * <h3>Description:</h3>
- * This class provide interfaces to accomplish several operations about users.<br>
- * <br>
  * @author Scott Piao
  * @author Hanzhong Qi<br>
  * E-Mail: <a href=mailto:17722018@bjtu.edu.cn>17722018@bjtu.edu.cn</a><br>
