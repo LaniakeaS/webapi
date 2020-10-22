@@ -1,6 +1,10 @@
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * This is a simple program for encoding and decoding messages using AES (Advanced Encrypt Algorithm).
@@ -17,7 +21,7 @@ class MyCryptoTool {
      * 
      * @param message Original message.
      * @param myKey A secrete key of String.
-     * @ivStr A set of 16 numbers to create the initialization vector (IV).
+     * @param ivStr A set of 16 numbers to create the initialization vector (IV).
      * @return The encrypted message in a byte array.
      */
     public byte[] encyptMessage(String message, String myKey, String ivStr) {
@@ -31,7 +35,7 @@ class MyCryptoTool {
             cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivParam);
 
             byte[] encrypResult = cipher.doFinal(message.getBytes());
-            
+
             //String cipherMessage = new String(encrypResult);
 
             return encrypResult;
@@ -82,6 +86,22 @@ class MyCryptoTool {
 
         SecretKeySpec secretKeySpec = new SecretKeySpec(arrayBytes16, "AES");
         return secretKeySpec;
+    }
+
+    public String generateSecretStr(String name, String password, String time) {
+        String originStr = name + password + time;
+        StringBuilder secretStr = new StringBuilder();
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(originStr.getBytes(StandardCharsets.UTF_8));
+            byte[] secretKeyInBytes = messageDigest.digest();
+            for (byte secretKeyInByte : secretKeyInBytes) {
+                secretStr.append(Integer.toHexString((0x000000ff & secretKeyInByte) | 0xffffff00).substring(6));
+            }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return secretStr.toString();
     }
 
 
