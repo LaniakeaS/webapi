@@ -88,6 +88,13 @@ class MyCryptoTool {
         return secretKeySpec;
     }
 
+    /**
+     * Generate the secret string from name, password and time by MD5.
+     * @param name user's name
+     * @param password user's password
+     * @param time user's last login time
+     * @return
+     */
     public String generateSecretStr(String name, String password, String time) {
         String originStr = name + password + time;
         StringBuilder secretStr = new StringBuilder();
@@ -96,12 +103,17 @@ class MyCryptoTool {
             messageDigest.update(originStr.getBytes(StandardCharsets.UTF_8));
             byte[] secretKeyInBytes = messageDigest.digest();
             for (byte secretKeyInByte : secretKeyInBytes) {
-                secretStr.append(Integer.toHexString((0x000000ff & secretKeyInByte) | 0xffffff00).substring(6));
+                int secretKeyInByteInt = secretKeyInByte;
+                if (secretKeyInByteInt < 0)
+                    secretKeyInByteInt += 256;
+                if (secretKeyInByteInt < 16)
+                    secretStr.append("0");
+                secretStr.append(Integer.toHexString(secretKeyInByteInt));
             }
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        return secretStr.toString();
+        return secretStr.substring(8, 24);
     }
 
 
