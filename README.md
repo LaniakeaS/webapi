@@ -55,7 +55,7 @@
       |errMsg|错误信息|
       
     + 登录Cookie及安全
-        1.  Cookie有效期为0
+        1.  Cookie有效期-1
         2.  HttpOnly属性为True
         3.  对Cookie综合时间、用户名和随机数进行加密
         ```secretString = MD5(name+passwordd+lastLoginTime```
@@ -150,7 +150,64 @@
       |city|城市|
       |province|省份|
       |errMsg|错误信息|
-
+4.  商品搜索：
+    + 请求URL：
+    
+        ```GET: /webapi/search```
+        
+    + 参数信息：
+        
+        |参数名|类型|必填|缺省值|说明|
+        |:----:|:----:|:----:|:----:|:----:|
+        |searchType|enum|是|null|搜索目的(goods，不可为seller)|
+        |searchName|String|是|null|搜索关键字|
+        
+    + 请求示例：
+    
+        ```<ip>/webapi/search?searchType=goods&searchName=universe```
+        
+    + 响应示例：
+    
+        ```
+        {
+            "status": 0,
+            "goods" [
+                {
+                    "name":"Airbus A380",
+                    "price":10,
+                    "sold": 0,
+                    "remaining": 1,
+                    "picture": 不知道咋办,
+                },
+                {
+                    "name":"Boeing 787",
+                    "price":10,
+                    "sold": 0,
+                    "remaining": 1,
+                    "picture": 不知道咋办,
+                },
+            ]
+        }
+        ```
+        ```
+        {
+            "status": 1,
+            "errMsg": "Did not choose search type.",   
+        }
+        ```
+      
+    + 字段说明：
+    
+        |字段名称|说明|
+        |:----:|:----:|
+        |status|状态码: 0(正常), -1(异常)|
+        |goods|商品对象数组|
+        |name|商品名称|
+        |price|商品价格|
+        |sold|商品已卖出数量|
+        |remaining|商品剩余数量|
+        |errMsg|错误信息|
+        
 ---
 #### 参与贡献
 
