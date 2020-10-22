@@ -44,6 +44,7 @@ public class LoginAPI extends HttpServlet {
             if (newUser == null) {
 
                 newUser = User.login(accountName, password);
+                users.put(accountName, newUser);
                 isLoggedIn = "false";
 
             }
