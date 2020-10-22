@@ -58,6 +58,7 @@
         1.  Cookie有效期为0
         2.  HttpOnly属性为True
         3.  对Cookie综合时间、用户名和随机数进行加密
+        ```secretString = MD5(name+passwordd+lastLoginTime```
     
 2.  用户注册:
     + 请求 URL:
