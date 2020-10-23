@@ -153,7 +153,7 @@
 4.  商品搜索：
     + 请求URL：
     
-        ```GET: /webapi/search```
+        ```GET: /webapi/goodsSearch```
         
     + 参数信息：
         
@@ -164,7 +164,7 @@
         
     + 请求示例：
     
-        ```<ip>/webapi/search?searchType=goods&searchName=universe```
+        ```<ip>/webapi/goodsSearch?searchType=goods&searchName=universe```
         
     + 响应示例：
     
@@ -206,6 +206,71 @@
         |price|商品价格|
         |sold|商品已卖出数量|
         |remaining|商品剩余数量|
+        |errMsg|错误信息|
+
+4.  卖家搜索：
+    + 请求URL：
+    
+        ```GET: /webapi/sellersSearch```
+        
+    + 参数信息：
+        
+        |参数名|类型|必填|缺省值|说明|
+        |:----:|:----:|:----:|:----:|:----:|
+        |searchType|enum|是|null|搜索目的(sellers，不可为goods)|
+        |searchName|String|是|null|搜索关键字|
+        
+    + 请求示例：
+    
+        ```<ip>/webapi/sellersSearch?searchType=sellers&searchName=universe```
+        
+    + 响应示例：
+    
+        ```
+        {
+            "status": 0,
+            "goods" [
+                {
+                    "goods_id": 0,
+                    "goods_name":"Airbus A380",
+                    "goods_intro": "A big passager plane",
+                    "goods_category_id": 1,
+                    "goods_cover_img": "dajeandfkajeijf",
+                    "original_price":10,
+                    "selling_price": 8,
+                    "stock_num": 1,
+                    "tag": "plane",
+      
+                    "shop_id": 23,
+                    "shop_name": "Airbus",
+                },
+            ]
+        }
+        ```
+        ```
+        {
+            "status": 1,
+            "errMsg": "Did not choose search type.",   
+        }
+        ```
+      
+    + 字段说明：
+    
+        |字段名称|说明|
+        |:----:|:----:|
+        |status|状态码: 0(正常), -1(异常)|
+        |goods|商品对象数组|
+        |goods_id|商品id|
+        |goods_name|商品名称|
+        |goods_intro|商品介绍|
+        |good_category_id|商品种类id|
+        |goods_cover_img|封面图片|
+        |origin_price|商品原价|
+        |selling_price|商品现价|
+        |stock_num|商品剩余数量|
+        |tag|标签|
+        |shop_id|卖家id|
+        |shop_name|卖家名称|
         |errMsg|错误信息|
         
 ---
