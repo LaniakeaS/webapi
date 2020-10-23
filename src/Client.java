@@ -35,6 +35,7 @@ public class Client {
             String wholeStr = "/location/ip?" + paramsStr + sk;
             String tempStr = URLEncoder.encode(wholeStr, "UTF-8");
             String sn = snCal.MD5(tempStr);
+            System.out.println(sn);
             /* get sn */
 
             //Create URL instance with Web Service Address

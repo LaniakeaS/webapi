@@ -44,7 +44,7 @@ public class HomeAPI extends HttpServlet {
             out.println(LocationAPI.parseJSON(responseContent) + ",");
 
             // TODO 根据用户名从数据库读取
-            out.println("    \"avatar\": ICON,");
+            out.println("    \"avatar\": \"ICON\",");
 
             out.println("    \"toBuy\":");
             out.println("    [");

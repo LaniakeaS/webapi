@@ -50,8 +50,8 @@ public class LocationAPI extends HttpServlet {
             responseContent = parseJSON(responseContent);
             out.println("{");
             out.println("    \"status\": 0,");
-            out.println("    \"ip\": " + ip + ",");
-            out.println("    \"location\":");
+            out.println("    \"ip\": \"" + ip + "\",");
+            out.println("    \"location\": ");
             out.println(responseContent);
             out.println("}");
 
@@ -59,8 +59,8 @@ public class LocationAPI extends HttpServlet {
 
             e.printStackTrace();
             out.println("{");
-            out.println("    \"status\": -1,");
-            out.println("    \"errMsg\": \"" + e.getMessage() + "\"");
+            out.println("    \"status\":-1,");
+            out.println("    \"errMsg\":\"" + e.getMessage() + "\"");
             out.println("}");
 
         }
@@ -97,8 +97,8 @@ public class LocationAPI extends HttpServlet {
         JSONObject jsonObject = JSONObject.fromObject(json);
         JSONObject content = jsonObject.getJSONObject("content");
         JSONObject detail = content.getJSONObject("address_detail");
-        return ("    {\n" + "        \"city\": " + detail.getString("city") + ",\n        \"province\": " +
-                detail.getString("province") + "\n    }");
+        return ("    {\n        \"city\": \"" + detail.getString("city") + "\",\n        \"province\": \"" +
+                detail.getString("province") + "\"\n    }");
 
     }
 

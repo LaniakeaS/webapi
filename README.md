@@ -19,7 +19,7 @@
 ---
 #### <a id="使用说明">使用说明</a>
 
-1.  <a id="身份验证">身份验证</a>：  
+1.  ##### <a id="身份验证">身份验证</a>：  
     + 请求 URL:
     
         ```GET: /webapi/user/login```
@@ -28,7 +28,6 @@
     
         |参数名|类型|必填|缺省值|说明|
         |:----:|:----:|:----:|:----:|:----:|
-        |type|enum|否|buyer|用户类型(buyer或者seller)|
         |accountName|String|是|null|账户昵称(4-8个非数字字符)|
         |password|String|是|null|帐户密码(8-16个由大小写字母和数字组成的字符串)|
     
@@ -71,7 +70,7 @@
         3.  对Cookie综合时间、用户名和随机数进行加密
         ```secretString = MD5(name+passwordd+lastLoginTime```
     
-2.  <a id="用户注册">用户注册</a>:
+2.  ##### <a id="用户注册">用户注册</a>:
     + 请求 URL:
         
         ```POST: /webapi/user/register```
@@ -80,7 +79,6 @@
     
         |参数名|类型|必填|缺省值|说明|
         |:----:|:----:|:----:|:----:|:----:|
-        |type|enum|否|buyer|用户类型(buyer或者seller)|
         |accountName|String|是|null|账户名称(4-8个非特殊字符)|
         |nickName|String|是|null|昵称(4-8个非特殊字符)|
         |password|String|是|null|帐户密码(8-16个由大小写字母和数字组成的字符串)|
@@ -93,7 +91,7 @@
     
     + 请求示例:
     
-        ```<ip>/webapi/user/login?nickName=SB567&type=buyer&accountName=abcde&password=Abc123456&name=Tony&phoneNumber=15836274626&gender=male```
+        ```<ip>/webapi/user/login?nickName=SB567&accountName=abcde&password=Abc123456&name=Tony&phoneNumber=15836274626&gender=male```
     
     + 响应示例:
         ```
@@ -116,7 +114,7 @@
       |status|状态码: 0(正常), -1(异常)|
       |errMsg|错误信息|
 
-3.  <a id="IP定位">IP定位</a>:
+3.  ##### <a id="IP定位">IP定位</a>:
     + 请求 URL:
         
         ```GET: /webapi/geo/ip```
@@ -161,7 +159,7 @@
       |city|城市|
       |province|省份|
       |errMsg|错误信息|
-4.  <a id="商品搜索">商品搜索</a>：
+4.  ##### <a id="商品搜索">商品搜索</a>：
     + 请求URL：
     
         ```GET: /webapi/search```

@@ -43,7 +43,6 @@ public class RegisterAPI extends HttpServlet {
             if (typeString == null)
                 typeString = "buyer";
 
-            UserType type = UserType.valueOf(typeString);
             String accountName = request.getParameter("accountName");
             String nickName = request.getParameter("nickName");
             String password = request.getParameter("password");
@@ -64,27 +63,9 @@ public class RegisterAPI extends HttpServlet {
             if (identityNum == null)
                 identityNum = "";
 
-            switch (type) {
-
-            case buyer:
-
-                User user = new User(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
-                        introduceSign, String.valueOf(idGenerator.nextId()));
-                User.register(user);
-                break;
-
-            case seller:
-
-                Seller seller = new Seller(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
-                        introduceSign, String.valueOf(idGenerator.nextId()));
-                Seller.register(seller);
-                break;
-
-            default:
-
-                System.out.println("Fatal Error! (UserType)");
-                throw new UserTypeException();
-            }
+            User user = new User(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
+                    introduceSign, String.valueOf(idGenerator.nextId()));
+            User.register(user);
 
             out.println("{");
             out.println("    \"status\": 0");
@@ -94,7 +75,7 @@ public class RegisterAPI extends HttpServlet {
             e.printStackTrace();
             out.println("{");
             out.println("    \"status\": -1,");
-            out.println("    \"errMsg\": " + e.getMessage());
+            out.println("    \"errMsg\": \"" + e.getMessage() + "\"");
 
         } finally {
 
