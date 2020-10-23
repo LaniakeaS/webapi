@@ -114,7 +114,7 @@ public class User {
             throw new NickNameFormatException();
 
         // TODO 判断账户名称是否已经存在
-        if (!Test.isAccountNameExist(newUser.accountName))
+        if (/*!Test.isAccountNameExist(newUser.accountName)*/false)
             throw new AccountNameExistException();
 
         if (!Pattern.compile("^(?!\\d+$)(?![A-Za-z]+$)(?![a-z0-9]+$)(?![A-Z0-9]+$)[a-zA-Z0-9]{8,16}$")
@@ -128,9 +128,9 @@ public class User {
         newUser.inDate = new Date(System.currentTimeMillis());
 
         // TODO 调用数据库接口的 INSERT 功能在数据库中建立新的用户
-        Test.runModify("insert into customer (customer_id, nick_name, login_name, password_md5, introduce_sign) " +
+        /*Test.runModify("insert into customer (customer_id, nick_name, login_name, password_md5, introduce_sign) " +
                 "values (25, \"" + newUser.nickName + "\", \"" + newUser.accountName + "\", \"" +
-                newUser.password + "\", \"" + newUser.introduceSign + "\");");
+                newUser.password + "\", \"" + newUser.introduceSign + "\");");*/
 
     }
 
