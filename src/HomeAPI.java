@@ -28,6 +28,7 @@ public class HomeAPI extends HttpServlet {
             throws IOException {
 
         response.setContentType("text/json;charset=UTF-8");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         String ip = request.getRemoteAddr();
         String accountName = request.getParameter("accountName");
         PrintWriter out = response.getWriter();

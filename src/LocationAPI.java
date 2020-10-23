@@ -34,6 +34,7 @@ public class LocationAPI extends HttpServlet {
             throws IOException {
 
         response.setContentType("text/json;charset=UTF-8");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         PrintWriter out = response.getWriter();
 
         try {
