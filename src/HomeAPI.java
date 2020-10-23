@@ -1,5 +1,3 @@
-import net.sf.json.JSONObject;
-
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -8,9 +6,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * <h3>Description:</h3>
- * This class provide interfaces to accomplish several operations about users.<br>
- * <br>
  * @author Scott Piao
  * @author Hanzhong Qi<br>
  * E-Mail: <a href=mailto:17722018@bjtu.edu.cn>17722018@bjtu.edu.cn</a><br>
@@ -33,6 +28,7 @@ public class HomeAPI extends HttpServlet {
             throws IOException {
 
         response.setContentType("text/json;charset=UTF-8");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         String ip = request.getRemoteAddr();
         String accountName = request.getParameter("accountName");
         PrintWriter out = response.getWriter();
@@ -48,7 +44,7 @@ public class HomeAPI extends HttpServlet {
             out.println(LocationAPI.parseJSON(responseContent) + ",");
 
             // TODO 根据用户名从数据库读取
-            out.println("    \"avatar\": ICON,");
+            out.println("    \"avatar\": \"ICON\",");
 
             out.println("    \"toBuy\":");
             out.println("    [");

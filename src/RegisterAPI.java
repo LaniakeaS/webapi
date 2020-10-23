@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * <h3>Description:</h3>
- * This class provide interfaces to accomplish several operations about users.<br>
- * <br>
  * @author Scott Piao
  * @author Hanzhong Qi<br>
  * E-Mail: <a href=mailto:17722018@bjtu.edu.cn>17722018@bjtu.edu.cn</a><br>
@@ -20,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(urlPatterns = {"/user/register"})
 public class RegisterAPI extends HttpServlet {
+
+    protected static IDGenerator idGenerator = new IDGenerator(5L, 3L);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,6 +33,7 @@ public class RegisterAPI extends HttpServlet {
             throws IOException {
 
         response.setContentType("text/json;charset=UTF-8");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         PrintWriter out = response.getWriter();
 
         try {
@@ -43,7 +43,6 @@ public class RegisterAPI extends HttpServlet {
             if (typeString == null)
                 typeString = "buyer";
 
-            UserType type = UserType.valueOf(typeString);
             String accountName = request.getParameter("accountName");
             String nickName = request.getParameter("nickName");
             String password = request.getParameter("password");
@@ -64,37 +63,19 @@ public class RegisterAPI extends HttpServlet {
             if (identityNum == null)
                 identityNum = "";
 
-            switch (type) {
-
-            case buyer:
-
-                User user = new User(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
-                        introduceSign);
-                User.register(user);
-                break;
-
-            case seller:
-
-                Seller seller = new Seller(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
-                        introduceSign);
-                Seller.register(seller);
-                break;
-
-            default:
-
-                System.out.println("Fatal Error! (UserType)");
-                throw new UserTypeException();
-            }
+            User user = new User(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
+                    introduceSign, String.valueOf(idGenerator.nextId()));
+            User.register(user);
 
             out.println("{");
-            out.println("\"status\": " + "true");
+            out.println("    \"status\": 0");
 
         } catch (Exception e) {
 
             e.printStackTrace();
             out.println("{");
-            out.println("\"status\": " + "false,");
-            out.println("\"errMsg\": " + e.getMessage());
+            out.println("    \"status\": -1,");
+            out.println("    \"errMsg\": \"" + e.getMessage() + "\"");
 
         } finally {
 
@@ -106,7 +87,7 @@ public class RegisterAPI extends HttpServlet {
 
 
     /**
-     * Handles the HTTP <code>GET</code> method.<br>
+     * Handles the HTTP <code>POST</code> method.<br>
      * <br>
      * @param request servlet request
      * @param response servlet response<br>
