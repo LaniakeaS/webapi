@@ -38,11 +38,6 @@ public class RegisterAPI extends HttpServlet {
 
         try {
 
-            String typeString = request.getParameter("type");
-
-            if (typeString == null)
-                typeString = "buyer";
-
             String accountName = request.getParameter("accountName");
             String nickName = request.getParameter("nickName");
             String password = request.getParameter("password");

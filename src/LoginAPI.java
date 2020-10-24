@@ -17,8 +17,6 @@ import java.util.Map;
 @WebServlet(urlPatterns = {"/user/login"})
 public class LoginAPI extends HttpServlet {
 
-    protected static Map<String, User> users = new HashMap<>();
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.<br>
@@ -39,24 +37,14 @@ public class LoginAPI extends HttpServlet {
 
             String accountName = request.getParameter("accountName");
             String password = request.getParameter("password");
-            User newUser = users.get(accountName);
-            String isLoggedIn = "true";
-
-            if (newUser == null) {
-
-                newUser = User.login(accountName, password);
-                users.put(accountName, newUser);
-                isLoggedIn = "false";
-
-            }
-
+            User newUser = User.login(accountName, password);
             out.println("{");
             out.println("    \"status\": 0,");
-            out.println("    \"ID\": " + newUser.ID + ",");
-            out.println("    \"accountName\": " + newUser.accountName + ",");
-            out.println("    \"nickName\": " + newUser.nickName + ",");
-            out.println("    \"lease\": null,");
-            out.println("    \"isLoggedIn\": " + isLoggedIn);
+            out.println("    \"ID\": \"" + newUser.ID + "\",");
+            out.println("    \"accountName\": \"" + newUser.accountName + "\",");
+            out.println("    \"nickName\": \"" + newUser.nickName + "\",");
+            out.println("    \"lease\": \"null\",");
+            out.println("    \"isLoggedIn\": \"false\"");
             out.println("}");
 
         } catch (Exception e) {
@@ -64,7 +52,7 @@ public class LoginAPI extends HttpServlet {
             e.printStackTrace();
             out.println("{");
             out.println("    \"status\": -1,");
-            out.println("    \"errMsg\": " + e.getMessage());
+            out.println("    \"errMsg\": \"" + e.getMessage() + "\"");
             out.println("}");
 
         }
