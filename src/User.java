@@ -1,5 +1,6 @@
 import exceptions.*;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -92,38 +93,18 @@ public class User {
 
 
     /**
-     * @param ID ID
-     * @param password password<br>
-     * <br>
-     * <br>
-     * @return return a User that just has been authorized<br>
-     * <br>
-     * <br>
-     * @exception AccountNotRegisteredException Account has not been registered.
-     * @exception PasswordIncorrectException Incorrect password.
-     */
-    protected static User login(int ID, String password)
-            throws AccountNotRegisteredException, PasswordIncorrectException {
-
-        // TODO 根据 ID 或者 account name 来确认数据库是否存在，然后验证密码。如果成功返回 User，否则抛出异常。
-        return null;
-
-    }
-
-
-    /**
      * Create a new user in database.<br>
      * <br>
      * <br>
      * @param newUser a instance of user
      */
     protected static void register(User newUser)
-            throws UserAPIException {
+            throws UserAPIException, SQLException {
 
         if (newUser.age < 18)
             throw new AgeException();
 
-        if (Pattern.compile("\\d{11}").matcher(newUser.phoneNumber).matches())
+        if (!Pattern.compile("\\d{11}").matcher(newUser.phoneNumber).matches())
             throw new PhoneNumberFormatException();
 
         if (!Pattern.compile("\\w{4,18}").matcher(newUser.accountName).matches())
@@ -133,7 +114,7 @@ public class User {
             throw new NickNameFormatException();
 
         // TODO 判断账户名称是否已经存在
-        if (false)
+        if (/*!Test.isAccountNameExist(newUser.accountName)*/false)
             throw new AccountNameExistException();
 
         if (!Pattern.compile("^(?!\\d+$)(?![A-Za-z]+$)(?![a-z0-9]+$)(?![A-Z0-9]+$)[a-zA-Z0-9]{8,16}$")
@@ -147,7 +128,9 @@ public class User {
         newUser.inDate = new Date(System.currentTimeMillis());
 
         // TODO 调用数据库接口的 INSERT 功能在数据库中建立新的用户
-        // TODO 查询新建立的用户 ID 并初始化
+        /*Test.runModify("insert into customer (customer_id, nick_name, login_name, password_md5, introduce_sign) " +
+                "values (25, \"" + newUser.nickName + "\", \"" + newUser.accountName + "\", \"" +
+                newUser.password + "\", \"" + newUser.introduceSign + "\");");*/
 
     }
 

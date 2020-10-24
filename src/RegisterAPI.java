@@ -69,6 +69,7 @@ public class RegisterAPI extends HttpServlet {
 
             out.println("{");
             out.println("    \"status\": 0");
+            out.println("}");
 
         } catch (Exception e) {
 
@@ -76,9 +77,6 @@ public class RegisterAPI extends HttpServlet {
             out.println("{");
             out.println("    \"status\": -1,");
             out.println("    \"errMsg\": \"" + e.getMessage() + "\"");
-
-        } finally {
-
             out.println("}");
 
         }
@@ -99,19 +97,6 @@ public class RegisterAPI extends HttpServlet {
             throws IOException {
 
         processRequest(request, response);
-
-    }
-
-
-    /**
-     * Returns a short description of the servlet.<br>
-     * <br>
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-
-        return "Short description";
 
     }
 

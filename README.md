@@ -39,18 +39,18 @@
         ```
         {
             "status": 0,
-            "ID": 123456,
-            "accountName": abcde,
-            "nickName": Pony,
-            "lease": null,
-            "isLoggedIn": false
+            "ID": "123456",
+            "accountName": "abcde",
+            "nickName": "Pony",
+            "lease": "null",
+            "isLoggedIn": "false"
         }
         ```
       
         ```
         {
             "status": -1,
-            "errMsg": 密码错误
+            "errMsg": "密码错误"
         }
         ```
         
@@ -103,7 +103,7 @@
         ```
         {
             "status": -1,
-            "errMsg": 密码格式错误
+            "errMsg": "密码格式错误"
         }
         ```
         
@@ -133,11 +133,11 @@
         ```
         {
             "status": 0,
-            "ip": 112.54.81.12,
+            "ip": "112.54.81.12",
             "location":
             {
-                "city": 威海市,
-                "province": 山东省
+                "city": "威海市",
+                "province": "山东省"
             }
         }
         ```
@@ -145,7 +145,7 @@
         ```
         {
             "status": -1,
-            "errMsg": error message
+            "errMsg": "error message"
         }
         ```
         
