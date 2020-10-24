@@ -180,7 +180,7 @@
         ```
         {
             "status": 0,
-            "goods" [
+            "goods": [
                 {
                     "name":"Airbus A380",
                     "price":10,
@@ -238,18 +238,8 @@
         ```
         {
             "status": 0,
-            "goods" [
+            "Shops" [
                 {
-                    "goods_id": 0,
-                    "goods_name":"Airbus A380",
-                    "goods_intro": "A big passager plane",
-                    "goods_category_id": 1,
-                    "goods_cover_img": "dajeandfkajeijf",
-                    "original_price":10,
-                    "selling_price": 8,
-                    "stock_num": 1,
-                    "tag": "plane",
-      
                     "shop_id": 23,
                     "shop_name": "Airbus",
                 },

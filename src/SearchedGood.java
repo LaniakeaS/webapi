@@ -5,18 +5,18 @@
  */
 
 public class SearchedGood {
-    private int goodsId;
-    private String goodsName;
-    private String goodsIntro;
-    private int goodsCategoryId;
-    private String goodsCoverImg;
-    private int originPrice;
-    private int sellingPrice;
-    private int stockNum;
-    private String tag;
+    private final String goodsId;
+    private final String goodsName;
+    private final String goodsIntro;
+    private final int goodsCategoryId;
+    private final String goodsCoverImg;
+    private final int originPrice;
+    private final int sellingPrice;
+    private final int stockNum;
+    private final String tag;
 
-    private int shopId;
-    private String shopName;
+    private final int shopId;
+    private final String shopName;
 
     /**
      * Constructor.
@@ -32,7 +32,7 @@ public class SearchedGood {
      * @param shopId Shop's id
      * @param shopName Shop's name
      */
-    public SearchedGood(int goodsId,
+    public SearchedGood(String goodsId,
                         String goodsName,
                         String goodsIntro,
                         int goodsCategoryId,
@@ -61,11 +61,10 @@ public class SearchedGood {
      * @return JSON string
      */
     public String generateJSON() {
-        StringBuilder result = new StringBuilder("{");
+        StringBuffer result = new StringBuffer("{");
 
         result.append("\"goods_id\":");
-        result.append(goodsId);
-        result.append(",");
+        result.append("\"").append(goodsId).append("\",");
 
         result.append("\"goods_name\":");
         result.append("\"").append(goodsName).append("\",");
@@ -105,91 +104,93 @@ public class SearchedGood {
         return result.append("}").toString();
     }
 
-    /**
-     * Set the good's id.
-     * @param goodsId Good's id
-     */
-    public void setGoodsId(int goodsId) {
-        this.goodsId = goodsId;
-    }
 
-    /**
-     * Set the good's name.
-     * @param goodsName Good's name.
-     */
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName;
-    }
+//    /**
+//     * Set the good's id.
+//     * @param goodsId Good's id
+//     */
+//    public void setGoodsId(String goodsId) {
+//        this.goodsId = goodsId;
+//    }
+//
+//    /**
+//     * Set the good's name.
+//     * @param goodsName Good's name.
+//     */
+//    public void setGoodsName(String goodsName) {
+//        this.goodsName = goodsName;
+//    }
+//
+//    /**
+//     * Set the good's introduction.
+//     * @param goodsIntro Good's introduction
+//     */
+//    public void setGoodsIntro(String goodsIntro) {
+//        this.goodsIntro = goodsIntro;
+//    }
+//
+//    /**
+//     * Set the good's category id.
+//     * @param goodsCategoryId Good's category id
+//     */
+//    public void setGoodsCategoryId(int goodsCategoryId) {
+//        this.goodsCategoryId = goodsCategoryId;
+//    }
+//
+//    /**
+//     * Set the good's cover image.
+//     * @param goodsCoverImg Good's cover image
+//     */
+//    public void setGoodsCoverImg(String goodsCoverImg) {
+//        this.goodsCoverImg = goodsCoverImg;
+//    }
+//
+//    /**
+//     * Set the original price.
+//     * @param originPrice Good's origin price.
+//     */
+//    public void setOriginPrice(int originPrice) {
+//        this.originPrice = originPrice;
+//    }
+//
+//    /**
+//     * Set the selling price.
+//     * @param sellingPrice Good's selling price
+//     */
+//    public void setSellingPrice(int sellingPrice) {
+//        this.sellingPrice = sellingPrice;
+//    }
+//
+//    /**
+//     * Set the good's stock number.
+//     * @param stockNum Good's stock number
+//     */
+//    public void setStockNum(int stockNum) {
+//        this.stockNum = stockNum;
+//    }
+//
+//    /**
+//     * Set the tag.
+//     * @param tag Tag.
+//     */
+//    public void setTag(String tag) {
+//        this.tag = tag;
+//    }
+//
+//    /**
+//     * Set the shop id.
+//     * @param shopId Shop's id
+//     */
+//    public void setShopId(int shopId) {
+//        this.shopId = shopId;
+//    }
+//
+//    /**
+//     * Set the shop name.
+//     * @param shopName Shop's name
+//     */
+//    public void setShopName(String shopName) {
+//        this.shopName = shopName;
+//    }
 
-    /**
-     * Set the good's introduction.
-     * @param goodsIntro Good's introduction
-     */
-    public void setGoodsIntro(String goodsIntro) {
-        this.goodsIntro = goodsIntro;
-    }
-
-    /**
-     * Set the good's category id.
-     * @param goodsCategoryId Good's category id
-     */
-    public void setGoodsCategoryId(int goodsCategoryId) {
-        this.goodsCategoryId = goodsCategoryId;
-    }
-
-    /**
-     * Set the good's cover image.
-     * @param goodsCoverImg Good's cover image
-     */
-    public void setGoodsCoverImg(String goodsCoverImg) {
-        this.goodsCoverImg = goodsCoverImg;
-    }
-
-    /**
-     * Set the original price.
-     * @param originPrice Good's origin price.
-     */
-    public void setOriginPrice(int originPrice) {
-        this.originPrice = originPrice;
-    }
-
-    /**
-     * Set the selling price.
-     * @param sellingPrice Good's selling price
-     */
-    public void setSellingPrice(int sellingPrice) {
-        this.sellingPrice = sellingPrice;
-    }
-
-    /**
-     * Set the good's stock number.
-     * @param stockNum Good's stock number
-     */
-    public void setStockNum(int stockNum) {
-        this.stockNum = stockNum;
-    }
-
-    /**
-     * Set the tag.
-     * @param tag Tag.
-     */
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
-    /**
-     * Set the shop id.
-     * @param shopId Shop's id
-     */
-    public void setShopId(int shopId) {
-        this.shopId = shopId;
-    }
-
-    /**
-     * Set the shop name.
-     * @param shopName Shop's name
-     */
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
-    }
 }
