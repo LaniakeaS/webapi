@@ -7,23 +7,21 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/goodsSearch"})
-public class goodsSearch extends HttpServlet {
+@WebServlet(urlPatterns = {"/shopsSearch"})
+public class shopsSearch extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("text/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        List<SearchedGood> searchedGoodsList = new ArrayList<>();
+        List<SearchedShop> searchedShopList = new ArrayList<>();
 
         try {
             String searchName = request.getParameter("searchName");
             /*
-            Get info from database.
+
              */
-
-            out.print(processJSON(searchedGoodsList));
-
+            out.print(processJSON(searchedShopList));
         } catch (Exception e) {
             out.println("{");
             out.println("    \"status\": -1,");
@@ -32,12 +30,12 @@ public class goodsSearch extends HttpServlet {
         }
     }
 
-    private String processJSON(List<SearchedGood> searchedGoodsList) {
+    private String processJSON(List<SearchedShop> searchedShopList) {
         StringBuilder json = new StringBuilder("{");
         json.append("\"status\": 0," +
-                "\"goods\": [");
-        for (SearchedGood searchedGood : searchedGoodsList) {
-            json.append(searchedGood.generateJSON());
+                "\"shops\": [");
+        for (SearchedShop searchedShop : searchedShopList) {
+            json.append(searchedShop.generateJSON());
             json.append(",");
         }
         json.deleteCharAt(json.length() - 1);
