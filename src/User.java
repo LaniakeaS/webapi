@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
  */
 public class User {
 
+    protected boolean isLoggedIn;
     protected Date inDate;
     protected Gender gender;
     protected int age;
@@ -69,13 +70,13 @@ public class User {
      * @exception PasswordIncorrectException Incorrect password.
      */
     protected static User login(String accountName, String password)
-            throws AccountNotRegisteredException, PasswordIncorrectException {
+            throws AccountNotRegisteredException, PasswordIncorrectException, SQLException {
 
         // TODO 根据 ID 或者 account name 来确认其是否存在于数据库中，然后验证密码。如果成功返回 User，否则抛出异常。
-        if (false)
+        if (false/*!Test.isAccountNameExist(accountName)*/)
             throw new AccountNotRegisteredException();
 
-        if (false)
+        if (false/*!Test.isPasswordCorrect(accountName, MD5.getInstance().getMD5(password))*/)
             throw new PasswordIncorrectException();
 
         int age = 0;
@@ -114,7 +115,7 @@ public class User {
             throw new NickNameFormatException();
 
         // TODO 判断账户名称是否已经存在
-        if (/*!Test.isAccountNameExist(newUser.accountName)*/false)
+        if (false/*!Test.isAccountNameExist(newUser.accountName)*/)
             throw new AccountNameExistException();
 
         if (!Pattern.compile("^(?!\\d+$)(?![A-Za-z]+$)(?![a-z0-9]+$)(?![A-Z0-9]+$)[a-zA-Z0-9]{8,16}$")
@@ -126,6 +127,7 @@ public class User {
             throw new IdentityNumException();
 
         newUser.inDate = new Date(System.currentTimeMillis());
+        newUser.password = MD5.getInstance().getMD5(newUser.password);
 
         // TODO 调用数据库接口的 INSERT 功能在数据库中建立新的用户
         /*Test.runModify("insert into customer (customer_id, nick_name, login_name, password_md5, introduce_sign) " +

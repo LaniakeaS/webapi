@@ -33,7 +33,7 @@
     
     + 请求示例:
     
-        ```<ip>/webapi/user/login?type=buyer&accountName=abcde&password=Abc123456```
+        ```<ip>/webapi/user/login?accountName=acivkdi&password=Abc123456```
     
     + 响应示例:
         ```
@@ -59,9 +59,11 @@
       |字段名称|说明|
       |:----:|:----:|
       |status|状态码: 0(正常), -1(异常)|
-      |type|用户类型|
       |ID|用户ID|
-      |accountName|用户昵称|
+      |accountName|账户名称|
+      |nickName|用户昵称|
+      |lease|租赁时长|
+      |isLoggedIn|是否已经登陆|
       |errMsg|错误信息|
       
     + 登录Cookie及安全
@@ -82,16 +84,16 @@
         |accountName|String|是|null|账户名称(4-8个非特殊字符)|
         |nickName|String|是|null|昵称(4-8个非特殊字符)|
         |password|String|是|null|帐户密码(8-16个由大小写字母和数字组成的字符串)|
-        |introduceSign|String|否|null|个人签名|
+        |introduceSign|String|否|""|个人签名|
         |name|String|是|null|用户真实姓名|
-        |identityNum|String|否|null|证件号码|
+        |identityNum|String|否|""|证件号码|
         |phoneNumber|String|是|null|电话号码|
-        |gender|enum|否|secret|性别|
+        |gender|enum|否|secret|性别(male, female, secret)|
         |age|int|是|null|用户年龄|
     
     + 请求示例:
     
-        ```<ip>/webapi/user/login?nickName=SB567&accountName=abcde&password=Abc123456&name=Tony&phoneNumber=15836274626&gender=male```
+        ```<ip>/webapi/user/register?accountName=acivkdi&password=Abc123456&name=Tony&phoneNumber=15906307587&gender=male&age=20&nickName=tony393&identityNum=230302199810165038```
     
     + 响应示例:
         ```
@@ -159,6 +161,7 @@
       |city|城市|
       |province|省份|
       |errMsg|错误信息|
+      
 4.  ##### <a id="商品搜索">商品搜索</a>：
     + 请求URL：
     
