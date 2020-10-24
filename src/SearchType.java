@@ -4,6 +4,6 @@
 public enum SearchType {
 
     goods,
-    seller
+    seller,
 
 }
