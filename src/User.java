@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  */
 public class User {
 
-    protected boolean isLoggedIn;
+    protected String isLoggedIn;
     protected Gender gender;
     protected int age;
     protected List<Address> addresses;
@@ -69,23 +69,38 @@ public class User {
     protected static User login(String accountName, String password)
             throws AccountNotRegisteredException, PasswordIncorrectException, SQLException {
 
-        // TODO 根据 ID 或者 account name 来确认其是否存在于数据库中，然后验证密码。如果成功返回 User，否则抛出异常。
+        // TODO 改为正式数据库接口
         if (!TestDatabaseAPI.isAccountNameExist(accountName))
             throw new AccountNotRegisteredException();
 
+        // TODO 改为正式数据库接口
         if (!TestDatabaseAPI.isPasswordCorrect(accountName, MD5.getInstance().getMD5(password)))
             throw new PasswordIncorrectException();
 
-        int age = 0;
-        String phoneNumber = "";
-        String identityNum = "";
-        String name = "";
-        String nickName = "";
+        // extract information from database
+        String ID = TestDatabaseAPI.runQuery("select customer_id from customer where login_name = \"" +
+                accountName + "\";").get(0).get(0);
+        List<String> result = TestDatabaseAPI.runQuery("select * from customer " +
+                "where customer_id = \"" + ID + "\";").get(0);
+        List<String> resultInfo = TestDatabaseAPI.runQuery("select * from customer_inf " +
+                "where customer_id = \"" + ID + "\";").get(0);
+        String phoneNumber = resultInfo.get(5);
+        String identityNum = resultInfo.get(4);
+        String name = resultInfo.get(2);
+        String nickName = result.get(1);
         Gender gender = Gender.secret;
-        String introduceSign = "";
-        String ID = "";
-        return new User(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
+        String introduceSign = result.get(5);
+
+        // TODO 数据库中加入 age
+        int age = 0;
+
+        User loginUser = new User(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
                 introduceSign, ID);
+        loginUser.isLoggedIn = result.get(6);
+
+        // add in users list
+        Daemon.users.put(accountName, loginUser);
+        return loginUser;
 
     }
 
@@ -99,9 +114,6 @@ public class User {
     protected static void register(User newUser)
             throws UserAPIException, SQLException {
 
-        if (newUser.age < 18)
-            throw new AgeException();
-
         if (!Pattern.compile("\\d{11}").matcher(newUser.phoneNumber).matches())
             throw new PhoneNumberFormatException();
 
@@ -111,8 +123,8 @@ public class User {
         if (!Pattern.compile("\\w{4,18}").matcher(newUser.nickName).matches())
             throw new NickNameFormatException();
 
-        // TODO 判断账户名称是否已经存在
-        if (!TestDatabaseAPI.isAccountNameExist(newUser.accountName))
+        // TODO 改为正式数据库接口
+        if (TestDatabaseAPI.isAccountNameExist(newUser.accountName))
             throw new AccountNameExistException();
 
         if (!Pattern.compile("^(?!\\d+$)(?![A-Za-z]+$)(?![a-z0-9]+$)(?![A-Z0-9]+$)[a-zA-Z0-9]{8,16}$")
@@ -124,24 +136,28 @@ public class User {
             throw new IdentityNumException();
 
         newUser.password = MD5.getInstance().getMD5(newUser.password);
+        newUser.isLoggedIn = "1";
 
-        // TODO 调用数据库接口的 INSERT 功能在数据库中建立新的用户
-        TestDatabaseAPI.runModify("insert into customer (customer_id, nick_name, login_name, password_md5, introduce_sign) " +
-                "values (\"" + newUser.ID + "\", \"" + newUser.nickName + "\", \"" + newUser.accountName + "\", \"" +
-                newUser.password + "\", \"" + newUser.introduceSign + "\");");
+        // TODO 改为正式数据库接口
+        TestDatabaseAPI.runModify("insert into customer (customer_id, nick_name, login_name, password_md5, " +
+                "introduce_sign, is_status) " + "values (\"" + newUser.ID + "\", \"" + newUser.nickName + "\", \"" +
+                newUser.accountName + "\", \"" + newUser.password + "\", \"" + newUser.introduceSign + "\", " +
+                newUser.isLoggedIn + ");");
 
         newUser.creatTime = TestDatabaseAPI.runQuery("select create_time from customer where login_name = \"" +
                 newUser.accountName + "\";").get(0).get(0);
 
         try {
 
-            TestDatabaseAPI.runModify("insert into customer_inf (customer_id, customer_name, identity_card_no, mobile_phone, " +
-                    "gender, register_time) values (\"" + newUser.ID + "\", \"" + newUser.name + "\", \"" +
-                    newUser.identityNum + "\", \"" + newUser.phoneNumber + "\", \"" + newUser.gender.toString() +
-                    "\", \"" + newUser.creatTime + "\");");
+            // TODO 改为正式数据库接口
+            TestDatabaseAPI.runModify("insert into customer_inf (customer_inf_id, customer_id, " +
+                    "customer_name, identity_card_no, mobile_phone, " + "gender, register_time) values (\"" +
+                    newUser.ID + "\", \"" + newUser.ID + "\", \"" + newUser.name + "\", \"" + newUser.identityNum +
+                    "\", \"" + newUser.phoneNumber + "\", \"0\", \"" + newUser.creatTime + "\");");
 
         } catch (SQLException e) {
 
+            // TODO 改为正式数据库接口
             TestDatabaseAPI.runModify("delete from customer where login_name = \"" + newUser.accountName + "\";");
             throw e;
 
@@ -166,7 +182,7 @@ public class User {
 
     protected void saveChanges() {
 
-        // TODO
+        // TODO save changes
 
     }
 

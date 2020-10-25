@@ -43,7 +43,7 @@
             "accountName": "abcde",
             "nickName": "Pony",
             "lease": "null",
-            "isLoggedIn": "false"
+            "isLoggedIn": "1"
         }
         ```
       
@@ -63,7 +63,7 @@
       |accountName|账户名称|
       |nickName|用户昵称|
       |lease|租赁时长|
-      |isLoggedIn|是否已经登陆|
+      |isLoggedIn|是否已经登陆(0-在线;1-不在线)|
       |errMsg|错误信息|
       
     + 登录Cookie及安全
