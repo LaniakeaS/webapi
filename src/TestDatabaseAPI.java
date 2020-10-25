@@ -4,6 +4,17 @@ import java.util.ArrayList;
 
 public class TestDatabaseAPI {
 
+    private static Connection c;
+
+
+    static {
+
+        c = getConnection("com.mysql.cj.jdbc.Driver", "jdbc:mysql://10.128.11.95:6666/course",
+                "distribsys", "distribsys");
+
+    }
+
+
     public static void main(String[] args) {
 
         IDGenerator id = new IDGenerator(5L, 4L);
@@ -31,8 +42,6 @@ public class TestDatabaseAPI {
 
     public static List<List<String>> runQuery(String query) throws SQLException {
 
-        Connection c = getConnection("com.mysql.cj.jdbc.Driver",
-                "jdbc:mysql://10.128.11.95:6666/course", "distribsys", "distribsys");
         assert c != null;
         Statement statement;
         statement = c.createStatement();
@@ -44,8 +53,6 @@ public class TestDatabaseAPI {
 
     public static void runModify(String query) throws SQLException {
 
-        Connection c = getConnection("com.mysql.cj.jdbc.Driver",
-                "jdbc:mysql://10.128.11.95:6666/course", "distribsys", "distribsys");
         assert c != null;
         Statement statement;
         statement = c.createStatement();
@@ -68,9 +75,7 @@ public class TestDatabaseAPI {
 
         try {
 
-            System.out.println("OK first");
             Class.forName(dbDriver).newInstance();
-            System.out.println("OK here");
             connection = DriverManager.getConnection(dbURL, username, password);
             return connection;
 

@@ -29,6 +29,9 @@ public class LoginAPI extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
 
+        if (!Daemon.getInstance().isAlive())
+            Daemon.getInstance().start();
+
         response.setContentType("text/json;charset=UTF-8");
         response.setHeader("Access-Control-Allow-Origin", "*");
         PrintWriter out = response.getWriter();
@@ -44,8 +47,17 @@ public class LoginAPI extends HttpServlet {
             out.println("    \"accountName\": \"" + newUser.accountName + "\",");
             out.println("    \"nickName\": \"" + newUser.nickName + "\",");
             out.println("    \"lease\": \"null\",");
-            out.println("    \"isLoggedIn\": \"false\"");
+            out.println("    \"isLoggedIn\": \"" + newUser.isLoggedIn + "\"");
             out.println("}");
+
+            // set login status to 0
+            if (newUser.isLoggedIn.equals("1")) {
+
+                TestDatabaseAPI.runModify("update customer set is_status = 0 where login_name = \"" + accountName +
+                        "\";");
+                newUser.isLoggedIn = "0";
+
+            }
 
         } catch (Exception e) {
 

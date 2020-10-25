@@ -104,12 +104,12 @@ public class RegisterAPI extends HttpServlet {
      * <br>
      * @throws IOException if an I/O error occurs
      */
-    /*@Override
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
 
         processRequest(request, response);
 
-    }*/
+    }
 
 }
