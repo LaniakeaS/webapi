@@ -1,9 +1,7 @@
 import exceptions.*;
 
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -21,12 +19,11 @@ import java.util.regex.Pattern;
 public class User {
 
     protected boolean isLoggedIn;
-    protected Date inDate;
     protected Gender gender;
     protected int age;
     protected List<Address> addresses;
     protected List<Order> orders;
-    protected String accountName, name, password, phoneNumber, nickName, introduceSign, identityNum, ID;
+    protected String accountName, name, password, phoneNumber, nickName, introduceSign, identityNum, ID, creatTime;
 
 
     /**
@@ -73,10 +70,10 @@ public class User {
             throws AccountNotRegisteredException, PasswordIncorrectException, SQLException {
 
         // TODO 根据 ID 或者 account name 来确认其是否存在于数据库中，然后验证密码。如果成功返回 User，否则抛出异常。
-        if (false/*!Test.isAccountNameExist(accountName)*/)
+        if (!TestDatabaseAPI.isAccountNameExist(accountName))
             throw new AccountNotRegisteredException();
 
-        if (false/*!Test.isPasswordCorrect(accountName, MD5.getInstance().getMD5(password))*/)
+        if (!TestDatabaseAPI.isPasswordCorrect(accountName, MD5.getInstance().getMD5(password)))
             throw new PasswordIncorrectException();
 
         int age = 0;
@@ -115,7 +112,7 @@ public class User {
             throw new NickNameFormatException();
 
         // TODO 判断账户名称是否已经存在
-        if (false/*!Test.isAccountNameExist(newUser.accountName)*/)
+        if (!TestDatabaseAPI.isAccountNameExist(newUser.accountName))
             throw new AccountNameExistException();
 
         if (!Pattern.compile("^(?!\\d+$)(?![A-Za-z]+$)(?![a-z0-9]+$)(?![A-Z0-9]+$)[a-zA-Z0-9]{8,16}$")
@@ -126,21 +123,29 @@ public class User {
                 matcher(newUser.identityNum).matches())
             throw new IdentityNumException();
 
-        newUser.inDate = new Date(System.currentTimeMillis());
         newUser.password = MD5.getInstance().getMD5(newUser.password);
 
         // TODO 调用数据库接口的 INSERT 功能在数据库中建立新的用户
-        /*Test.runModify("insert into customer (customer_id, nick_name, login_name, password_md5, introduce_sign) " +
-                "values (25, \"" + newUser.nickName + "\", \"" + newUser.accountName + "\", \"" +
-                newUser.password + "\", \"" + newUser.introduceSign + "\");");*/
+        TestDatabaseAPI.runModify("insert into customer (customer_id, nick_name, login_name, password_md5, introduce_sign) " +
+                "values (\"" + newUser.ID + "\", \"" + newUser.nickName + "\", \"" + newUser.accountName + "\", \"" +
+                newUser.password + "\", \"" + newUser.introduceSign + "\");");
 
-    }
+        newUser.creatTime = TestDatabaseAPI.runQuery("select create_time from customer where login_name = \"" +
+                newUser.accountName + "\";").get(0).get(0);
 
+        try {
 
-    protected String inDate() {
+            TestDatabaseAPI.runModify("insert into customer_inf (customer_id, customer_name, identity_card_no, mobile_phone, " +
+                    "gender, register_time) values (\"" + newUser.ID + "\", \"" + newUser.name + "\", \"" +
+                    newUser.identityNum + "\", \"" + newUser.phoneNumber + "\", \"" + newUser.gender.toString() +
+                    "\", \"" + newUser.creatTime + "\");");
 
-        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
-        return formatter.format(inDate);
+        } catch (SQLException e) {
+
+            TestDatabaseAPI.runModify("delete from customer where login_name = \"" + newUser.accountName + "\";");
+            throw e;
+
+        }
 
     }
 

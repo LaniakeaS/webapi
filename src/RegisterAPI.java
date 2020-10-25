@@ -95,4 +95,21 @@ public class RegisterAPI extends HttpServlet {
 
     }
 
+
+    /**
+     * Handles the HTTP <code>GET</code> method.<br>
+     * <br>
+     * @param request servlet request
+     * @param response servlet response<br>
+     * <br>
+     * @throws IOException if an I/O error occurs
+     */
+    /*@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+
+        processRequest(request, response);
+
+    }*/
+
 }
