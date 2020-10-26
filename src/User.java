@@ -88,7 +88,7 @@ public class User {
         String identityNum = resultInfo.get(4);
         String name = resultInfo.get(2);
         String nickName = result.get(1);
-        Gender gender = Gender.valueOf(resultInfo.get(7));
+        Gender gender = Gender.valueOf(resultInfo.get(8));
         String introduceSign = result.get(5);
         int age = Integer.parseInt(resultInfo.get(3));
 
