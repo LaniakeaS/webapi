@@ -15,10 +15,11 @@ public class TestDatabaseAPI {
     }
 
 
-    public static void main(String[] args) {
+    public static boolean isIDNumExist(String IdentityNum) throws SQLException {
 
-        IDGenerator id = new IDGenerator(5L, 4L);
-        System.out.println(id.nextId());
+        List<List<String>> result = runQuery("select login_name from customer where identity_card_no = \"" + IdentityNum +
+                "\";");
+        return result.size() != 0;
 
     }
 
@@ -34,7 +35,8 @@ public class TestDatabaseAPI {
 
     public static boolean isAccountNameExist(String accountName) throws SQLException {
 
-        List<List<String>> result = runQuery("select login_name from customer;");
+        List<List<String>> result = runQuery("select login_name from customer where login_name = \"" + accountName +
+                "\";");
         return result.size() != 0;
 
     }
