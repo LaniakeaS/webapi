@@ -34,7 +34,8 @@ public class TestDatabaseAPI {
 
     public static boolean isAccountNameExist(String accountName) throws SQLException {
 
-        List<List<String>> result = runQuery("select login_name from customer;");
+        List<List<String>> result = runQuery("select login_name from customer where login_name = \"" + accountName +
+                "\";");
         return result.size() != 0;
 
     }
