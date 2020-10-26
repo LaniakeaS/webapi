@@ -15,10 +15,11 @@ public class TestDatabaseAPI {
     }
 
 
-    public static void main(String[] args) {
+    public static boolean isIDNumExist(String IdentityNum) throws SQLException {
 
-        IDGenerator id = new IDGenerator(5L, 4L);
-        System.out.println(id.nextId());
+        List<List<String>> result = runQuery("select login_name from customer where IdentityNum = \"" + IdentityNum +
+                "\";");
+        return result.size() != 0;
 
     }
 

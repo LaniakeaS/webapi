@@ -129,6 +129,10 @@ public class User {
         if (TestDatabaseAPI.isAccountNameExist(newUser.accountName))
             throw new AccountNameExistException();
 
+        // TODO 改为正式数据库接口
+        if (TestDatabaseAPI.isIDNumExist(newUser.identityNum))
+            throw new IdentityExistException();
+
         if (!Pattern.compile("^(?!\\d+$)(?![A-Za-z]+$)(?![a-z0-9]+$)(?![A-Z0-9]+$)[a-zA-Z0-9]{8,16}$")
                 .matcher(newUser.password).matches())
             throw new PasswordFormatException();
