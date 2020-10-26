@@ -24,7 +24,7 @@ public class OrderCart extends HttpServlet {
         try {
             String userId = TestDatabaseAPI.runQuery("SELECT customer_id FROM customer WHERE login_name = \"" +
                     userName + "\";").get(0).get(0);
-            List<List<String>> resultCart = TestDatabaseAPI.runQuery("SELECT cart_item_id, goods_id, goods_count, is_delete" +
+            List<List<String>> resultCart = TestDatabaseAPI.runQuery("SELECT cart_item_id, goods_id, goods_count, is_deleted" +
                     " FROM order_cart_item WHERE user_id = \"" + userId + "\";");
             List<List<String>> goodInfo = new ArrayList<>();
             for(List<String> list : resultCart) {
