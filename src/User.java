@@ -99,7 +99,9 @@ public class User {
         loginUser.isLoggedIn = result.get(6);
 
         // add in users list
-        Daemon.users.put(accountName, loginUser);
+        if (!Daemon.users.containsKey(accountName))
+            Daemon.users.put(accountName, loginUser);
+
         return loginUser;
 
     }
