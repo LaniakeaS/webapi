@@ -1,11 +1,11 @@
+import exceptions.ParameterException;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Scott Piao
@@ -40,15 +40,12 @@ public class LoginAPI extends HttpServlet {
 
             String accountName = request.getParameter("accountName");
             String password = request.getParameter("password");
+
+            if (accountName == null || password == null)
+                throw new ParameterException();
+
             User newUser = User.login(accountName, password);
-            out.println("{");
-            out.println("    \"status\": 0,");
-            out.println("    \"ID\": \"" + newUser.ID + "\",");
-            out.println("    \"accountName\": \"" + newUser.accountName + "\",");
-            out.println("    \"nickName\": \"" + newUser.nickName + "\",");
-            out.println("    \"lease\": \"null\",");
-            out.println("    \"isLoggedIn\": \"" + newUser.isLoggedIn + "\"");
-            out.println("}");
+            String wasLoggedIn = newUser.isLoggedIn;
 
             // set login status to 0
             if (newUser.isLoggedIn.equals("1")) {
@@ -58,6 +55,15 @@ public class LoginAPI extends HttpServlet {
                 newUser.isLoggedIn = "0";
 
             }
+
+            out.println("{");
+            out.println("    \"status\": 0,");
+            out.println("    \"ID\": \"" + newUser.ID + "\",");
+            out.println("    \"accountName\": \"" + newUser.accountName + "\",");
+            out.println("    \"nickName\": \"" + newUser.nickName + "\",");
+            out.println("    \"lease\": \"null\",");
+            out.println("    \"isLoggedIn\": \"" + wasLoggedIn + "\"");
+            out.println("}");
 
         } catch (Exception e) {
 
