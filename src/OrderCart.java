@@ -23,44 +23,44 @@ public class OrderCart extends HttpServlet {
         // TODO generate json
     }
 
-    private String generateJSON(List<OrderCartItem> orderCartItemList) {
-        StringBuffer json = new StringBuffer("{");
-        json.append("\"goods\":[");
-        for(int i = 1; i <= orderCartItemList.length(); i++) {
-            json.append("{");
-
-            json.append("\"id\":");
-            json.append(i);
-            json.append(",");
-
-            json.append("\"name\":");
-            //
-            json.append(",");
-
-            json.append("\"picture\":");
-            //
-            json.append(",");
-
-            json.append("\"description\":");
-            //
-            json.append(",");
-
-            json.append("\"price\":");
-            //
-            json.append(",");
-
-            json.append("\"number\":");
-            //
-            json.append(",");
-
-            json.append("\"discount\":");
-            //
-            json.append(",");
-
-            json.append("},");
-        }
-        json.append("]}");
-    }
+//    private String generateJSON(List<OrderCartItem> orderCartItemList) {
+//        StringBuffer json = new StringBuffer("{");
+//        json.append("\"goods\":[");
+//        for(int i = 1; i <= orderCartItemList.length(); i++) {
+//            json.append("{");
+//
+//            json.append("\"id\":");
+//            json.append(i);
+//            json.append(",");
+//
+//            json.append("\"name\":");
+//            //
+//            json.append(",");
+//
+//            json.append("\"picture\":");
+//            //
+//            json.append(",");
+//
+//            json.append("\"description\":");
+//            //
+//            json.append(",");
+//
+//            json.append("\"price\":");
+//            //
+//            json.append(",");
+//
+//            json.append("\"number\":");
+//            //
+//            json.append(",");
+//
+//            json.append("\"discount\":");
+//            //
+//            json.append(",");
+//
+//            json.append("},");
+//        }
+//        json.append("]}");
+//    }
 
 
     @Override
