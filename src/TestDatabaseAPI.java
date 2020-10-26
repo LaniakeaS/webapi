@@ -17,7 +17,7 @@ public class TestDatabaseAPI {
 
     public static boolean isIDNumExist(String IdentityNum) throws SQLException {
 
-        List<List<String>> result = runQuery("select login_name from customer where identity_card_no = \"" + IdentityNum +
+        List<List<String>> result = runQuery("select * from customer_inf where identity_card_no = \"" + IdentityNum +
                 "\";");
         return result.size() != 0;
 
