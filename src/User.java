@@ -88,11 +88,9 @@ public class User {
         String identityNum = resultInfo.get(4);
         String name = resultInfo.get(2);
         String nickName = result.get(1);
-        Gender gender = Gender.secret;
+        Gender gender = Gender.valueOf(resultInfo.get(7));
         String introduceSign = result.get(5);
-
-        // TODO 数据库中加入 age
-        int age = 0;
+        int age = Integer.parseInt(resultInfo.get(3));
 
         User loginUser = new User(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
                 introduceSign, ID);
@@ -156,10 +154,11 @@ public class User {
         try {
 
             // TODO 改为正式数据库接口
-            TestDatabaseAPI.runModify("insert into customer_inf (customer_inf_id, customer_id, " +
-                    "customer_name, identity_card_no, mobile_phone, " + "gender, register_time) values (\"" +
-                    newUser.ID + "\", \"" + newUser.ID + "\", \"" + newUser.name + "\", \"" + newUser.identityNum +
-                    "\", \"" + newUser.phoneNumber + "\", \"0\", \"" + newUser.creatTime + "\");");
+            TestDatabaseAPI.runModify("insert into customer_inf (age, customer_inf_id, customer_id, " +
+                    "customer_name, identity_card_no, mobile_phone, " + "gender, register_time) values (" +
+                    newUser.age + ", \"" + newUser.ID + "\", \"" + newUser.ID + "\", \"" + newUser.name + "\", \"" +
+                    newUser.identityNum + "\", \"" + newUser.phoneNumber + "\", \"" + newUser.gender.toString() +
+                    "\", \"" + newUser.creatTime + "\");");
 
         } catch (SQLException e) {
 
