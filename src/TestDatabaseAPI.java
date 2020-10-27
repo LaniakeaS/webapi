@@ -63,6 +63,16 @@ public class TestDatabaseAPI {
     }
 
 
+    public static ResultSet getResultSet(String query) throws SQLException {
+
+        assert c != null;
+        Statement statement;
+        statement = c.createStatement();
+        return statement.executeQuery(query);
+
+    }
+
+
     /**
      * Connect to database and return the connection.
      * @param dbDriver Database driver class name.

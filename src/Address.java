@@ -6,17 +6,20 @@
  */
 public class Address {
 
-    protected int ID;
-    protected String country, province, city, countyOrDistrict, detail;
+    protected String ID, province, city, countyOrDistrict, detail, consignee, phoneNum, status;
 
 
-    protected Address(String country, String province, String city, String countyOrDistrict, String detail) {
+    protected Address(String ID, String province, String city, String countyOrDistrict, String detail,
+                      String consignee, String phoneNum, String status) {
 
-        this.country = country;
+        this.ID = ID;
         this.province = province;
         this.city = city;
         this.countyOrDistrict = countyOrDistrict;
         this.detail = detail;
+        this.consignee = consignee;
+        this.phoneNum = phoneNum;
+        this.status = status;
 
     }
 

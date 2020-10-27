@@ -9,6 +9,7 @@
     - [商品搜索](#商品搜索)
     - [卖家搜索](#卖家搜索)
     - [用户登出](#用户登出)
+    - [收货地址](#收货地址)
 3.  [参与贡献](#参与贡献)
 ---
 #### <a id="介绍">介绍</a>
@@ -77,7 +78,7 @@
 2.  ##### <a id="用户注册">用户注册</a>:
     + 请求 URL:
         
-        ```POST: /webapi/user/register```
+        ```GET: /webapi/user/register```
         
     + 参数信息:
     
@@ -286,7 +287,7 @@
     
         |参数名|类型|必填|缺省值|说明|
         |:----:|:----:|:----:|:----:|:----:|
-        |accountName|String|是|null|账户昵称(4-8个非数字字符)|
+        |accountName|String|是|null|账户名称|
     
     + 请求示例:
     
@@ -312,6 +313,97 @@
       |:----:|:----:|
       |status|状态码: 0(正常), -1(异常)|
       |errMsg|错误信息|
+      
+7.  ##### <a id="收货地址">收货地址</a>：
+    + 请求 URL:
+    
+        ```GET: /webapi/user/address```
+    
+    + 参数信息:
+    
+        |参数名|类型|必填|缺省值|说明|
+        |:----:|:----:|:----:|:----:|:----:|
+        |option|String|是|null|三种操作: add, delete, modify, get|
+        |accountName|String|是|null|账户名称(add, delete, modify, get)|
+        |province|String|是|null|省份(add, modify)|
+        |city|String|是|null|城市(add, modify)|
+        |county|String|否|""|地区(add. modify)|
+        |detail|String|是|null|详细地址(add, modify)|
+        |consignee|String|是|null|收货人(add, modify)|
+        |phoneNumber|String|是|null|收货人电话(add, modify)|
+        |status|String|是|null|地址默认值(1-默认, 2-非默认)(add, modify)|
+        |ID|String|是|null|地址ID(delete, modify)|
+    
+    + 请求示例:
+    
+        ```<ip>/webapi/user/address?option=add&accountName=Test123&province=山东&city=威海&county=文登&detail=BJTU&consignee=tony&phoneNumber=16542597416&status=1```  
+          
+        ```<ip>/webapi/user/address?option=delete&accountName=Test123&ID=45123545875```  
+          
+        ```<ip>/webapi/user/address?option=modify&accountName=Test123&province=山东&city=威海&county=文登&detail=BJTU&consignee=tony&phoneNumber=16542597416&status=1&ID=45123545875```  
+          
+        ```<ip>/webapi/user/address?option=get&accountName=Test123```
+    
+    + 响应示例:
+        ```
+        {
+            # add
+            "status": 0
+        }
+        ```
+      
+        ```
+        {
+            # delete
+            "status": 0
+        }
+        ```
+      
+        ```
+        {
+            # modify
+            "status": 0
+        }
+        ```
+      
+        ```
+        {
+            # get
+            "status": 0,
+            "addresses":
+            [
+                {
+                    "addid": "456451312331",
+                    "userId": "45645115156315361",
+                    "province": "山东",
+                    "city": "威海",
+                    "county": "文登",
+                    "detail": "BJTU",
+                    "consignee": "tony",
+                    "phoneNumber": "16542597416",
+                    "status": 1,
+                    "createTime": "2020-10-28 01:56:56",
+                    "upTime": "020-10-28 01:56:56",
+                }
+            ]
+        }
+        ```
+      
+        ```
+        {
+            "status": -1,
+            "errMsg": "密码错误"
+        }
+        ```
+        
+    + 字段说明:
+    
+      |字段名称|说明|
+      |:----:|:----:|
+      |status|状态码: 0(正常), -1(异常)|
+      |errMsg|错误信息|
+      |addid|地址ID|
+      |userId|用户ID|
                
 ---
 #### <a id="参与贡献">参与贡献</a>

@@ -1,8 +1,9 @@
 import exceptions.*;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 
@@ -21,8 +22,8 @@ public class User {
     protected String isLoggedIn;
     protected Gender gender;
     protected int age;
-    protected List<Address> addresses;
-    protected List<Order> orders;
+    protected Map<String, Address> addresses;
+    protected Map<String, Order> orders;
     protected String accountName, name, password, phoneNumber, nickName, introduceSign, identityNum, ID, creatTime;
 
 
@@ -49,8 +50,8 @@ public class User {
         this.gender = gender;
         this.identityNum = identityNum;
         this.ID = ID;
-        addresses = new ArrayList<>();
-        orders = new ArrayList<>();
+        addresses = new HashMap<>();
+        orders = new HashMap<>();
 
     }
 
@@ -171,21 +172,71 @@ public class User {
     }
 
 
-    protected void addAddress(String country, String province, String city, String countyOrDistrict, String detail) {
+    protected void addAddress(String province, String city, String countyOrDistrict, String detail,
+                              String consignee, String phoneNumber, String status) throws SQLException {
 
-        addresses.add(new Address(country, province, city, countyOrDistrict, detail));
+        String ID = String.valueOf(new IDGenerator(2L, 2L).nextId());
+
+        // TODO 改为正式数据库接口
+        TestDatabaseAPI.runModify("insert into customer_address (addid, userId, consignee, phone, province, " +
+                "city, area, address, status) values (\"" + ID + "\", \"" + this.ID + "\", \"" + consignee + "\", \"" +
+                phoneNumber + "\", \"" + province + "\", \"" + city + "\", \"" + countyOrDistrict + "\", \"" + detail +
+                "\", " + status + ");");
 
     }
 
 
-    protected void deleteAddress(int ID) {
+    protected void modifyAddress(String ID, String province, String city, String countyOrDistrict, String detail,
+                                 String consignee, String phoneNumber, String status) throws SQLException {
 
-        addresses.remove(ID);
+        // TODO 改为正式数据库接口
+        List<List<String>> modifyID = TestDatabaseAPI.runQuery("select addid from customer_address where status = 1;");
+
+        if (status.equals("1")) {
+
+            if (modifyID.size() != 0) {
+
+                // TODO 改为正式数据库接口
+                TestDatabaseAPI.runModify("update customer_address set status = 2 where addid = \"" +
+                        modifyID.get(0).get(0) + "\";");
+
+            }
+
+        }
+
+        try {
+
+            // TODO 改为正式数据库接口
+            TestDatabaseAPI.runModify("update customer_address set consignee = \"" + consignee + "\", phone = \"" +
+                    phoneNumber + "\", province = \"" + province + "\", city = \"" + city + "\", area = \"" +
+                    countyOrDistrict + "\", address = \"" + detail + "\", status = " + status + " where addid = \"" + ID +
+                    "\";");
+
+        } catch (SQLException e) {
+
+            if (modifyID.size() != 0) {
+
+                // TODO 改为正式数据库接口
+                TestDatabaseAPI.runModify("update customer_address set status = 1 where addid = \"" +
+                        modifyID.get(0).get(0) + "\";");
+
+            }
+
+        }
 
     }
 
 
-    protected void saveChanges() {
+    protected void deleteAddress(String ID) throws SQLException {
+
+        // TODO 改为正式数据库接口
+        TestDatabaseAPI.runModify("delete from customer_address where addid = \"" + ID + "\" and userId = \"" +
+                this.ID + "\";");
+
+    }
+
+
+    protected void changeInfo() {
 
         // TODO save changes
 
