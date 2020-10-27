@@ -71,19 +71,27 @@ public class OrderCart extends HttpServlet {
             json.append("{");
 
             json.append("\"id\":");
+            json.append("\"");
             json.append(cartItem.getCartId());
+            json.append("\"");
             json.append(",");
 
             json.append("\"name\":");
+            json.append("\"");
             json.append(cartItem.getName());
+            json.append("\"");
             json.append(",");
 
             json.append("\"picture\":");
+            json.append("\"");
             json.append(cartItem.getPicture());
+            json.append("\"");
             json.append(",");
 
             json.append("\"description\":");
+            json.append("\"");
             json.append(cartItem.getDescription());
+            json.append("\"");
             json.append(",");
 
             json.append("\"price\":");
