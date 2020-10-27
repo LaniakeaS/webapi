@@ -8,8 +8,8 @@ public class IDGenerator {
 
     private final long workerIdBits = 5L;
     private final long dataCenterIdBits = 5L;
-    private long dataCenterId;
-    private long workerId;
+    private final long dataCenterId;
+    private final long workerId;
     private long sequence;
     private long lastTimestamp = -1L;
 
