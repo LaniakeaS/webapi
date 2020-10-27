@@ -104,7 +104,6 @@ public class OrderCart extends HttpServlet {
 
             json.append("\"discount\":");
             json.append(cartItem.getDiscount());
-            json.append(",");
 
             json.append("},");
         }
