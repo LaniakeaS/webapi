@@ -10,6 +10,8 @@
     - [卖家搜索](#卖家搜索)
     - [用户登出](#用户登出)
     - [收货地址](#收货地址)
+    - [获取用户信息](#获取用户信息)
+    - [修改用户信息](#修改用户信息)
 3.  [参与贡献](#参与贡献)
 ---
 #### <a id="介绍">介绍</a>
@@ -317,7 +319,7 @@
 7.  ##### <a id="收货地址">收货地址</a>：
     + 请求 URL:
     
-        ```GET: /webapi/user/address```
+        ```GET: /webapi/user/profile/address```
     
     + 参数信息:
     
@@ -404,6 +406,101 @@
       |errMsg|错误信息|
       |addid|地址ID|
       |userId|用户ID|
+      
+8.  ##### <a id="获取用户信息">获取用户信息</a>：
+    + 请求 URL:
+        
+        ```GET: /webapi/user/profile/get```
+        
+    + 参数信息:
+        
+        |参数名|类型|必填|缺省值|说明|
+        |:----:|:----:|:----:|:----:|:----:|
+        |accountName|String|是|null|账户名称|
+        
+    + 请求示例:
+    
+        ```<ip>/webapi/user/profile/get?accountName=Test123```
+    
+    + 响应示例:
+        ```
+        {
+            "status": 0，
+            "nickName": "tony363",
+            "introduceSign": "",
+            "name": "",
+            "identityNum": "",
+            "phoneNumber": "",
+            "gender": "",
+            "age": 38,
+            "avatar": "39xcvuxd3980890de9908"
+        }
+        ```
+      
+        ```
+        {
+            "status": -1,
+            "errMsg": "错误信息"
+        }
+        ```
+        
+    + 字段说明:
+    
+      |字段名称|说明|
+      |:----:|:----:|
+      |status|状态码: 0(正常), -1(异常)|
+      |errMsg|错误信息|
+      |nickName|用户昵称|
+      |introduceSign|个人签名|
+      |name|真实姓名|
+      |identityNum|身份证号|
+      |phoneNumber|电话号码|
+      |gender|用户性别|
+      |age|用户年龄|
+      |avatar|图片base64二进制|
+    
+9.  ##### <a id="修改用户信息">修改用户信息</a>：
+    + 请求 URL:
+            
+        ```GET: /webapi/user/profile/modify```
+            
+    + 参数信息:
+        
+        |参数名|类型|必填|缺省值|说明|
+        |:----:|:----:|:----:|:----:|:----:|
+        |accountName|String|是|null|账户名称|
+        |nickName|String|是|null|用户昵称|
+        |password|String|是|null|账号密码|
+        |introduceSign|String|是|null|个人签名|
+        |phoneNumber|String|是|null|电话号码|
+        |gender|String|是|null|用户性别|
+        |age|int|是|null|用户年龄|
+        |avatar|String|是|null|图片base64二进制|
+        
+    + 请求示例:
+    
+        ```<ip>/webapi/user/profile/modify?accountName=Test123&nickName=vcxz&password=fdsvc2323&introduceSign=vcxzvc&phoneNumber=15623458756&gender=secret&age=39&avatar=vcx3c9898738d9c```
+    
+    + 响应示例:
+        ```
+        {
+            "status": 0
+        }
+        ```
+      
+        ```
+        {
+            "status": -1,
+            "errMsg": "错误信息"
+        }
+        ```
+        
+    + 字段说明:
+    
+      |字段名称|说明|
+      |:----:|:----:|
+      |status|状态码: 0(正常), -1(异常)|
+      |errMsg|错误信息|
                
 ---
 #### <a id="参与贡献">参与贡献</a>

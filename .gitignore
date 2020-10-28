@@ -66,4 +66,4 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 src/Test.java
-WEB-INF/
+META_INF/

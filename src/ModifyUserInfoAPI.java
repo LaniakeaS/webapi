@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 
-@WebServlet(urlPatterns = {"/user/profile/get"})
-public class GetUserInfoAPI extends HttpServlet {
+@WebServlet(urlPatterns = {"/user/profile/modify"})
+public class ModifyUserInfoAPI extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,33 +27,26 @@ public class GetUserInfoAPI extends HttpServlet {
         response.setHeader("Access-Control-Allow-Origin", "*");
         PrintWriter out = response.getWriter();
         String accountName = request.getParameter("accountName");
+        String nickName = request.getParameter("nickName");
+        String password = request.getParameter("password");
+        String introduceSign = request.getParameter("introduceSign");
+        String age = request.getParameter("age");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String gender = request.getParameter("gender");
+        String avatar = request.getParameter("avatar");
+
 
         try {
 
-            if (accountName == null || !Daemon.users.containsKey(accountName))
+            if (accountName == null || !Daemon.users.containsKey(accountName) || nickName == null || password == null ||
+                    introduceSign == null || age == null || phoneNumber == null || gender == null)
                 throw new ParameterException();
 
             User user = Daemon.users.get(accountName);
-            String nickName = user.nickName;
-            String introduceSign = user.introduceSign;
-            String name = user.name;
-            String identityNum = user.identityNum;
-            String phoneNumber = user.phoneNumber;
-            String gender = user.gender.toString();
-            int age = user.age;
-            String avatar = user.getAvatar();
-
+            user.changeInfo(nickName, MD5.getInstance().getMD5(password), introduceSign, Integer.parseInt(age),
+                    phoneNumber, Gender.valueOf("gender"), avatar);
             out.println("{");
-            out.println("    \"status\": 0,");
-            out.println("    \"accountName\": \"" + accountName + "\",");
-            out.println("    \"nickName\": \"" + nickName + "\",");
-            out.println("    \"introduceSign\": \"" + introduceSign + "\",");
-            out.println("    \"name\": \"" + name + "\",");
-            out.println("    \"identityNum\": " + identityNum + "\",");
-            out.println("    \"phoneNumber\": " + phoneNumber + "\",");
-            out.println("    \"gender\": \"" + gender + "\",");
-            out.println("    \"age\": " + age + ",");
-            out.println("    \"avatar\": \"" + avatar + "\"");
+            out.println("    \"status\": 0");
             out.println("}");
 
         } catch (Exception e) {
