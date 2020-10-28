@@ -13,14 +13,44 @@ public class shopsSearch extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("text/json;charset=UTF-8");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         PrintWriter out = response.getWriter();
         List<SearchedShop> searchedShopList = new ArrayList<>();
 
         try {
             String searchName = request.getParameter("searchName");
-            /*
+            List<List<String>> searchResultList = TestDatabaseAPI.runQuery("SELECT " +
+                    "shopId, " +
+                    "shopName, " +
+                    "auditStatus, " +
+                    "status, " +
+                    "phone, " +
+                    "address, " +
+                    "openTime, " +
+                    "endTime, " +
+                    "instruction, " +
+                    "createTime, " +
+                    "shopHead, " +
+                    "userId" +
+                    " FROM shop WHERE shopName = \"%" + searchName + "%\";");
+            for(List<String> searchResult : searchResultList) {
+                searchedShopList.add(new SearchedShop(
+                        searchResult.get(0),
+                        searchResult.get(1),
+                        Integer.parseInt(searchResult.get(2)),
+                        Integer.parseInt(searchResult.get(3)),
+                        searchResult.get(4),
+                        searchResult.get(5),
+                        searchResult.get(6),
+                        searchResult.get(7),
+                        searchResult.get(8),
+                        searchResult.get(9),
+                        searchResult.get(10),
+                        searchResult.get(11)
+                ));
+            }
 
-             */
+
             out.print(processJSON(searchedShopList));
         } catch (Exception e) {
             out.println("{");
@@ -41,5 +71,21 @@ public class shopsSearch extends HttpServlet {
         json.deleteCharAt(json.length() - 1);
         json.append("]}");
         return  json.toString();
+    }
+
+    /**
+     * Handles the HTTP <code>GET</code> method.<br>
+     * <br>
+     * @param request servlet request
+     * @param response servlet response<br>
+     * <br>
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+
+        processRequest(request, response);
+
     }
 }

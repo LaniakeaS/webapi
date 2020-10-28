@@ -13,10 +13,10 @@ public class SearchedShop {
     private final int status;
     private final String phone;
     private final String address;
-    private final LocalTime openTime;
-    private final LocalTime endTime;
+    private final String openTime;
+    private final String endTime;
     private final String instruction;
-    private final LocalTime createTime;
+    private final String createTime;
     private final String shopHead;
     private final String userId;
 
@@ -41,10 +41,10 @@ public class SearchedShop {
                         int status,
                         String phone,
                         String address,
-                        LocalTime openTime,
-                        LocalTime endTime,
+                        String openTime,
+                        String endTime,
                         String instruction,
-                        LocalTime createTime,
+                        String createTime,
                         String shopHead,
                         String userId) {
         this.shopId = shopId;
@@ -89,16 +89,16 @@ public class SearchedShop {
         result.append("\"").append(address).append("\",");
 
         result.append("\"open_time\":");
-        result.append("\"").append(openTime.format(DateTimeFormatter.ISO_LOCAL_TIME)).append("\",");
+        result.append("\"").append(openTime).append("\",");
 
         result.append("\"end_time\":");
-        result.append("\"").append(endTime.format(DateTimeFormatter.ISO_LOCAL_TIME)).append("\",");
+        result.append("\"").append(endTime).append("\",");
 
         result.append("\"instruction\":");
         result.append("\"").append(instruction).append("\",");
 
         result.append("\"create_time\":");
-        result.append("\"").append(createTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)).append("\",");
+        result.append("\"").append(createTime).append("\",");
 
         result.append("\"shop_head\":");
         result.append("\"").append(shopHead).append("\",");
