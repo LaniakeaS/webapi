@@ -85,4 +85,20 @@ public class AddGood extends HttpServlet {
         return TestDatabaseAPI.runQuery("SELECT shopId FROM shop WHERE userId = \"" +
                 userId + "\";").get(0).get(0);
     }
+
+    /**
+     * Handles the HTTP <code>GET</code> method.<br>
+     * <br>
+     * @param request servlet request
+     * @param response servlet response<br>
+     * <br>
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+
+        processRequest(request, response);
+
+    }
 }
