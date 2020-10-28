@@ -151,7 +151,7 @@ public class HomeAPI extends HttpServlet {
      * @return User's id
      * @throws SQLException MySQL exception
      */
-    private static String getUserId(String userName) throws SQLException {
+    protected static String getUserId(String userName) throws SQLException {
         return TestDatabaseAPI.runQuery("SELECT customer_id FROM customer WHERE login_name = \"" +
                 userName + "\";").get(0).get(0);
     }
