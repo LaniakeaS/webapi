@@ -1,5 +1,13 @@
 import exceptions.*;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +33,7 @@ public class User {
     protected Map<String, Address> addresses;
     protected Map<String, Order> orders;
     protected String accountName, name, password, phoneNumber, nickName, introduceSign, identityNum, ID, creatTime;
+    protected File avatar;
 
 
     /**
@@ -53,6 +62,7 @@ public class User {
         this.money = 0;
         addresses = new HashMap<>();
         orders = new HashMap<>();
+        avatar = new File("META_INF/avatar/" + ID + ".jpg");
 
     }
 
@@ -281,9 +291,43 @@ public class User {
     }
 
 
-    protected void changeInfo() {
+    protected void changeInfo(String nickName, String password, String introduceSign, int age, String phoneNumber,
+                              Gender gender, String imageBase64)
+            throws SQLException, IOException {
 
-        // TODO save changes
+        // TODO 改为正式数据库接口
+        TestDatabaseAPI.runModify("update customer set nick_name = \"" + nickName + "\", password_md5 = \"" +
+                password + "\", introduce_sign = \"" + introduceSign + "\", user_avatar = \"META_INF/avatar/" + ID +
+                ".jpg\" where customer_id = \"" + ID + "\";");
+
+        // TODO 改为正式数据库接口
+        TestDatabaseAPI.runModify("update customer_inf set age = " + age + ", mobile_phone = \"" + phoneNumber +
+                "\", gender = \"" + gender.toString() + "\" where customer_id = \"" + ID + "\";");
+
+        this.nickName = nickName;
+        this.password = password;
+        this.introduceSign = introduceSign;
+        this.age = age;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
+
+        //decode base64
+        byte[] bytes = new BASE64Decoder().decodeBuffer(imageBase64);
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+        BufferedImage bufferedImage = ImageIO.read(byteArrayInputStream);
+        avatar.deleteOnExit();
+        ImageIO.write(bufferedImage, "jpg", avatar);
+
+    }
+
+
+    protected String getAvatar() throws IOException {
+
+        BufferedImage bufferedImage = ImageIO.read(avatar);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, "jpg", byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+        return new BASE64Encoder().encodeBuffer(bytes).trim();
 
     }
 
