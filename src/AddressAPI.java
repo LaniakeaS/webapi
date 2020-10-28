@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-@WebServlet(urlPatterns = {"/user/address"})
+@WebServlet(urlPatterns = {"/user/profile/address"})
 public class AddressAPI extends HttpServlet {
 
     /**
@@ -97,8 +97,6 @@ public class AddressAPI extends HttpServlet {
 
                         List<String> row = iterator.next();
                         Iterator<String> iterator1 = row.iterator();
-
-
                         Iterator<String> keyIterator = key.iterator();
                         json.append("        {\n");
 

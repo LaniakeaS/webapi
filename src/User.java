@@ -21,7 +21,7 @@ public class User {
 
     protected String isLoggedIn;
     protected Gender gender;
-    protected int age;
+    protected int age, money, level;
     protected Map<String, Address> addresses;
     protected Map<String, Order> orders;
     protected String accountName, name, password, phoneNumber, nickName, introduceSign, identityNum, ID, creatTime;
@@ -50,6 +50,7 @@ public class User {
         this.gender = gender;
         this.identityNum = identityNum;
         this.ID = ID;
+        this.money = 0;
         addresses = new HashMap<>();
         orders = new HashMap<>();
 
@@ -96,6 +97,7 @@ public class User {
         User loginUser = new User(age, phoneNumber, name, identityNum, accountName, nickName, password, gender,
                 introduceSign, ID);
         loginUser.isLoggedIn = result.get(6);
+        loginUser.money = Integer.parseInt(resultInfo.get(13));
 
         // add in users list
         if (!Daemon.users.containsKey(accountName))
@@ -168,6 +170,34 @@ public class User {
             throw e;
 
         }
+
+    }
+
+
+    protected void changeOtherAuthority(String accountName, int level)
+            throws SQLException, NoAuthorityException, AccountNotRegisteredException {
+
+        if (level != 0)
+            throw new NoAuthorityException();
+
+        List<List<String>> result = TestDatabaseAPI.runQuery("select customer_id from customer where login_name = \"" + accountName +
+                "\";");
+
+        if (result.size() == 0)
+            throw new AccountNotRegisteredException();
+
+        String ID = result.get(0).get(0);
+        TestDatabaseAPI.runModify("update customer_inf set customer_level = " + level + "where customer_id = \"" +
+                ID + "\";");
+
+    }
+
+
+    protected void changeAuthority(int level) throws SQLException {
+
+        this.level = level;
+        TestDatabaseAPI.runModify("update customer_inf set customer_level = " + level + "where customer_id = \"" +
+                ID + "\";");
 
     }
 

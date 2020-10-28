@@ -36,7 +36,7 @@
     
     + 请求示例:
     
-        ```<ip>/webapi/user/login?accountName=acivkdi&password=Abc123456```
+        ```<ip>/webapi/user/login?accountName=Test123&password=Abc123456```
     
     + 响应示例:
         ```
@@ -96,7 +96,7 @@
     
     + 请求示例:
     
-        ```<ip>/webapi/user/register?accountName=acivkdi&password=Abc123456&name=Tony&phoneNumber=15906307587&gender=male&age=20&nickName=tony393&identityNum=230302199810165038```
+        ```<ip>/webapi/user/register?accountName=Test123&password=Abc123456&name=Tony&phoneNumber=15906307587&gender=male&age=20&nickName=tony393&identityNum=230302199810165038```
     
     + 响应示例:
         ```
@@ -336,13 +336,13 @@
     
     + 请求示例:
     
-        ```<ip>/webapi/user/address?option=add&accountName=Test123&province=山东&city=威海&county=文登&detail=BJTU&consignee=tony&phoneNumber=16542597416&status=1```  
+        ```<ip>/webapi/user/profile/address?option=add&accountName=Test123&province=山东&city=威海&county=文登&detail=BJTU&consignee=tony&phoneNumber=16542597416&status=1```  
           
-        ```<ip>/webapi/user/address?option=delete&accountName=Test123&ID=45123545875```  
+        ```<ip>/webapi/user/profile/address?option=delete&accountName=Test123&ID=45123545875```  
           
-        ```<ip>/webapi/user/address?option=modify&accountName=Test123&province=山东&city=威海&county=文登&detail=BJTU&consignee=tony&phoneNumber=16542597416&status=1&ID=45123545875```  
+        ```<ip>/webapi/user/profile/address?option=modify&accountName=Test123&province=山东&city=威海&county=文登&detail=BJTU&consignee=tony&phoneNumber=16542597416&status=1&ID=45123545875```  
           
-        ```<ip>/webapi/user/address?option=get&accountName=Test123```
+        ```<ip>/webapi/user/profile/address?option=get&accountName=Test123```
     
     + 响应示例:
         ```

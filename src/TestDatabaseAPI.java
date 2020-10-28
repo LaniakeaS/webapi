@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TestDatabaseAPI {
 
-    private static Connection c;
+    private static final Connection c;
 
 
     static {
@@ -128,7 +128,7 @@ public class TestDatabaseAPI {
 
         try {
             int colNum = rsmd.getColumnCount();
-            List<String> colNames = new ArrayList<String>();
+            List<String> colNames = new ArrayList<>();
 
             for (int i = 1; i <= colNum; i++) {
                 colNames.add(rsmd.getColumnName(i));
@@ -149,48 +149,14 @@ public class TestDatabaseAPI {
      */
     public static List<List<String>> getResult(ResultSet rset) {
 
-        List<List<String>> result = new ArrayList<List<String>>();
+        List<List<String>> result = new ArrayList<>();
         List<String> row;
 
         try {
             int colNum = rset.getMetaData().getColumnCount();
             while (rset.next()) {
-                row = new ArrayList<String>();
+                row = new ArrayList<>();
 
-                for (int i = 1; i <= colNum; i++) {
-                    row.add(rset.getString(i));
-                }
-
-                result.add(row);
-            }
-            return result;
-        } catch (SQLException e) {
-            System.err.println("Error in retrieving data.");
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    /**
-     * @param rset JDBC ResultSet.
-     * @return List of Lists containing the elements of a table
-     */
-    public static List<List> getFilteredResult(ResultSet rset, int col, String filterValue) {
-
-        List<List> result = new ArrayList<List>();
-        List<String> row;
-
-        try {
-            int colNum = rset.getMetaData().getColumnCount();
-            while (rset.next()) {
-
-                //If the value of this colums equals to the filter string, ignore this row.
-                if (rset.getString(col).equals(filterValue)) {
-                    continue;
-                }
-
-                row = new ArrayList<String>();
                 for (int i = 1; i <= colNum; i++) {
                     row.add(rset.getString(i));
                 }

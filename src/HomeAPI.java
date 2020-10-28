@@ -50,7 +50,7 @@ public class HomeAPI extends HttpServlet {
             String responseContent = client.getLocation(ip);
             json.append("{");
             json.append("\"location\":");
-            json.append(LocationAPI.parseJSON(responseContent) + ",");
+            json.append(LocationAPI.parseJSON(responseContent)).append(",");
 
             // TODO 根据用户名从数据库读取
             json.append("    \"avatar\": \"ICON\",");
@@ -86,10 +86,15 @@ public class HomeAPI extends HttpServlet {
             json.append("]");
 
             json.append("}");
+            out.print(json);
 
         } catch (Exception e) {
 
             e.printStackTrace();
+            out.println("{");
+            out.println("    \"status\": -1,");
+            out.println("    \"errMsg\": \"" + e.getMessage() + "\"");
+            out.println("}");
 
         }
 
