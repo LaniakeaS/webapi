@@ -205,6 +205,21 @@ public class User {
     protected void addAddress(String province, String city, String countyOrDistrict, String detail,
                               String consignee, String phoneNumber, String status) throws SQLException {
 
+        // TODO 改为正式数据库接口
+        List<List<String>> modifyID = TestDatabaseAPI.runQuery("select addid from customer_address where status = 1;");
+
+        if (status.equals("1")) {
+
+            if (modifyID.size() != 0) {
+
+                // TODO 改为正式数据库接口
+                TestDatabaseAPI.runModify("update customer_address set status = 2 where addid = \"" +
+                        modifyID.get(0).get(0) + "\";");
+
+            }
+
+        }
+
         String ID = String.valueOf(new IDGenerator(2L, 2L).nextId());
 
         // TODO 改为正式数据库接口
