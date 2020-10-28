@@ -4,19 +4,10 @@ import java.util.ArrayList;
 
 public class TestDatabaseAPI {
 
-    private static final Connection c;
-
-
-    static {
-
-        c = getConnection("com.mysql.cj.jdbc.Driver", "jdbc:mysql://10.128.11.95:6666/course",
-                "distribsys", "distribsys");
-
-    }
-
-
     public static boolean isIDNumExist(String IdentityNum) throws SQLException {
 
+        Connection c = getConnection("com.mysql.cj.jdbc.Driver", "jdbc:mysql://10.128.11.95:6666/course",
+                "distribsys", "distribsys");
         List<List<String>> result = runQuery("select * from customer_inf where identity_card_no = \"" + IdentityNum +
                 "\";");
         return result.size() != 0;
@@ -26,6 +17,8 @@ public class TestDatabaseAPI {
 
     public static boolean isPasswordCorrect(String accountName, String password) throws  SQLException {
 
+        Connection c = getConnection("com.mysql.cj.jdbc.Driver", "jdbc:mysql://10.128.11.95:6666/course",
+                "distribsys", "distribsys");
         String pw = runQuery("select password_md5 from customer where login_name=" +
                 "\"" + accountName + "\";").get(0).get(0);
         return pw.equals(password);
@@ -35,6 +28,8 @@ public class TestDatabaseAPI {
 
     public static boolean isAccountNameExist(String accountName) throws SQLException {
 
+        Connection c = getConnection("com.mysql.cj.jdbc.Driver", "jdbc:mysql://10.128.11.95:6666/course",
+                "distribsys", "distribsys");
         List<List<String>> result = runQuery("select login_name from customer where login_name = \"" + accountName +
                 "\";");
         return result.size() != 0;
@@ -44,7 +39,8 @@ public class TestDatabaseAPI {
 
     public static List<List<String>> runQuery(String query) throws SQLException {
 
-        assert c != null;
+        Connection c = getConnection("com.mysql.cj.jdbc.Driver", "jdbc:mysql://10.128.11.95:6666/course",
+                "distribsys", "distribsys");
         Statement statement;
         statement = c.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
@@ -55,7 +51,8 @@ public class TestDatabaseAPI {
 
     public static void runModify(String query) throws SQLException {
 
-        assert c != null;
+        Connection c = getConnection("com.mysql.cj.jdbc.Driver", "jdbc:mysql://10.128.11.95:6666/course",
+                "distribsys", "distribsys");
         Statement statement;
         statement = c.createStatement();
         statement.executeUpdate(query);
@@ -65,7 +62,8 @@ public class TestDatabaseAPI {
 
     public static ResultSet getResultSet(String query) throws SQLException {
 
-        assert c != null;
+        Connection c = getConnection("com.mysql.cj.jdbc.Driver", "jdbc:mysql://10.128.11.95:6666/course",
+                "distribsys", "distribsys");
         Statement statement;
         statement = c.createStatement();
         return statement.executeQuery(query);
