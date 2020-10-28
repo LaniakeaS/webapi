@@ -59,9 +59,6 @@ public class OrderCart extends HttpServlet {
 
         out.print(generateJSON(cartItemList));
 
-        // TODO get cartInfo from database by userID
-
-        // TODO generate json
     }
 
     private String generateJSON(List<CartItem> cartItemList) {
